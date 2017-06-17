@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Alert, Button } from 'react-bootstrap';
+import { Modal, Glyphicon, Alert, Button } from 'react-bootstrap';
 import CSSModules from 'react-css-modules';
 import styles from './styles/AlertDialog';
 
@@ -32,7 +32,7 @@ class AlertDialog extends Component {
         onHide={this.closeDialog}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Alert</Modal.Title>
+          <Modal.Title><Glyphicon glyph="exclamation-sign" /> Alert</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Alert bsStyle="warning">

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import CSSModules from 'react-css-modules';
 import uuidV4 from 'uuid/v4';
 import Sound from 'react-sound';
-import { Modal, FormControl, Button } from 'react-bootstrap';
+import { Modal, Glyphicon, FormControl, Button } from 'react-bootstrap';
 import { getActivePreset } from '../selectors/presetsSelectors';
 import { setTitles } from '../actions/setTitles';
 import Timer from '../components/Timer';
@@ -249,7 +249,7 @@ class Timers extends Component {
           onHide={this.closeModifyTitleDialog}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Modify name</Modal.Title>
+            <Modal.Title><Glyphicon glyph="edit" /> Modify name</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className={this.state.titleValidationState ? `form-group has-${this.state.titleValidationState}` : 'form-group'}>

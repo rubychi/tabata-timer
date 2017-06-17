@@ -178,7 +178,8 @@ class App extends Component {
           onShowModifyNameDialog={() => this.setState({ play: false })}
           onChangeSubject={(activeSubject) => {
             if (activeSubject === 'Finished') {
-              this.setState({ activeSubject, play: false });
+              this.setState({ activeSubject, play: false, reset: true });
+              setTimeout(() => this.setState({ reset: false }));
             } else {
               this.setState({ activeSubject });
             }

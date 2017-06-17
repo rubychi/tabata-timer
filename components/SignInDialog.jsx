@@ -83,7 +83,7 @@ class SignInDialog extends Component {
           onHide={this.closeSignInDialog}
         >
           <Modal.Header closeButton>
-            <Modal.Title>{ this.props.title }</Modal.Title>
+            <Modal.Title><Glyphicon glyph="time" /> { this.props.title }</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             { this.renderBody() }

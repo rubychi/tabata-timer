@@ -44,13 +44,14 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  height: 92%;
+  height: 100%;
   right: 0;
+  padding-bottom: 0.9em;
   @include atSmall {
-    height: 85%;
+    padding-bottom: 1.2em;
   }
   @include atMediumSmall {
-    height: 80%;
+    padding-bottom: 1.5em;
   }
   @include atMedium {
     display: none;
@@ -58,6 +59,8 @@
 }
 
 .btn-plus {
+  display: flex;
+  align-items: center;
   font-size: 1rem;
   border-radius: 0 5px 0 0;
   flex: 1;
@@ -67,6 +70,8 @@
 }
 
 .btn-minus {
+  display: flex;
+  align-items: center;
   font-size: 1rem;
   border-radius: 0 0 5px 0;
   flex: 1;

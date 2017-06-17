@@ -10,7 +10,9 @@ import styles from './styles/SettingSection';
 class SettingSection extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      pressSettingBtn: false,
+    };
   }
 
   componentWillMount() {
@@ -54,7 +56,9 @@ class SettingSection extends Component {
             title={item.title}
             value={item.value}
             open={this.state[item.title]}
+            pressBtn={this.state.pressSettingBtn}
             onClickSetting={this.toggleSettings}
+            onPressBtn={(press) => this.setState({ pressSettingBtn: press })}
           />
         ))}
       </div>

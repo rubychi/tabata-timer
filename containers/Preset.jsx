@@ -80,7 +80,7 @@ class Preset extends Component {
           onHide={this.closeAddPresetDialog}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Add preset</Modal.Title>
+            <Modal.Title><Glyphicon glyph="plus-sign" /> Add preset</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className={this.state.presetValidationState ? `form-group has-${this.state.presetValidationState}` : 'form-group'}>
