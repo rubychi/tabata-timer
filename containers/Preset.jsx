@@ -88,6 +88,11 @@ class Preset extends Component {
                 inputRef={(ref) => { this.addPresetInput = ref; }}
                 type="text"
                 placeholder="Enter name"
+                onChange={() => {
+                  if (this.state.presetValidationState) {
+                    this.setState({ presetValidationState: null });
+                  }
+                }}
               />
               <HelpBlock className={this.state.presetValidationState ? 'show hint-error' : 'hidden'}>Type name is empty or already exists</HelpBlock>
             </div>

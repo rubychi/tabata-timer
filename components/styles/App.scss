@@ -38,6 +38,7 @@ header {
   font-size: 2rem;
   padding-left: 0.8em;
   flex: 8.2;
+  cursor: pointer;
   @include atSmall {
     font-size: 3rem;
   }

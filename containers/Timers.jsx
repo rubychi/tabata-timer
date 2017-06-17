@@ -257,6 +257,11 @@ class Timers extends Component {
                 inputRef={(ref) => { this.modifyNameInput = ref; }}
                 type="text"
                 placeholder={this.state.modifyName}
+                onChange={() => {
+                  if (this.state.titleValidationState) {
+                    this.setState({ titleValidationState: null });
+                  }
+                }}
               />
             </div>
           </Modal.Body>

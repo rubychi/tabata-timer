@@ -33,9 +33,20 @@ class SignInDialog extends Component {
 
   renderBody() {
     if (this.state.isSignInPage) {
-      return <SignIn showSignInDialog={this.state.showSignInDialog} signIn={this.state.signIn} onClickSignUp={() => this.setState({ isSignInPage: false })} />;
+      return (
+        <SignIn
+          signIn={this.state.signIn}
+          showSignInDialog={this.state.showSignInDialog}
+          onClickSignUp={() => this.setState({ isSignInPage: false })}
+        />
+      );
     } else {
-      return <SignUp signUp={this.state.signUp} onClickSignIn={() => this.setState({ isSignInPage: true })} />;
+      return (
+        <SignUp
+          signUp={this.state.signUp}
+          onClickSignIn={() => this.setState({ isSignInPage: true })}
+        />
+      );
     }
   }
 

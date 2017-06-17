@@ -194,7 +194,17 @@ class App extends Component {
       <div styleName="app-wrapper">
         <header>
           <div styleName="title-wrapper">
-            <span styleName="title">{ this.state.title }</span>
+            <span
+              styleName="title"
+              role="link"
+              onClick={() => {
+                if (this.state.openMenu) {
+                  this.setState({ openMenu: false, changeSetting: false })
+                }
+              }}
+            >
+              { this.state.title }
+            </span>
             { this.renderSignInNSignOutHref() }
             <SignInDialog
               title={this.state.title}
