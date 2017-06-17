@@ -16,6 +16,7 @@ class Timers extends Component {
 
     this.state = {
       timerId: null,
+      kickStart: false,
       playSound: false,
       showModifyTitleDialog: false,
       titleValidationState: null,
@@ -34,9 +35,16 @@ class Timers extends Component {
     this.setState({ timerId });
   }
 
-  componentWillReceiveProps(nextProps, nextState) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.reset || nextProps.changePreset || nextProps.changeSetting) {
       this.initState(nextProps.activePreset);
+    }
+
+    if (nextProps.startTimer) {
+      if (!this.state.kickStart) {
+        this.setState({ kickStart: true, playSound: true });
+        setTimeout(() => this.setState({ playSound: false }));
+      }
     }
   }
 
@@ -224,7 +232,7 @@ class Timers extends Component {
         {this.renderTimers()}
         <Sound
           url="https://www.soundjay.com/button/sounds/beep-02.mp3"
-          playStatus={this.props.startTimer ? Sound.status.PLAYING : Sound.status.STOPPED}
+          playStatus={this.state.playSound ? Sound.status.PLAYING : Sound.status.PAUSED}
           onFinishedPlaying={() => this.setState({ playSound: false })}
         />
         <Modal
