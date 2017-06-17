@@ -1,0 +1,55 @@
+.menu-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em 1em 0 1em;
+  background: $menu-bg;
+  z-index: 1;
+  @include atSmall {
+    padding-top: 1.5em;
+  }
+  @include atMediumSmall {
+    padding-top: 1.6em;
+  }
+  @include atMedium {
+    position: relative;
+    padding-bottom: 2em;
+    margin-bottom: 1em;
+    box-shadow: $engraved-shadow;
+  }
+  @include atLarge {
+    padding: 2em 3em 2em 3em;
+  }
+}
+
+.input-range-wrapper {
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 1em 2em 1em 2em;
+  border-left: $slide-bar-wrapper-shadow;
+  border-right: $slide-bar-wrapper-shadow;
+  background: $slide-bar-wrapper-color;
+  @include atMedium {
+    display: block;
+  }
+}
+
+.btns-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.1em;
+  @include atSmall {
+    margin-top: 0.5em;
+  }
+  @include atMedium {
+    margin-top: 1em;
+  }
+}
+.savebtn-custom {
+  flex: 0.48;
+}
+
+.deletebtn-custom {
+  flex: 0.48;
+}

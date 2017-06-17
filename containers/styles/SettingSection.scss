@@ -1,0 +1,15 @@
+.setting-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 0.5em;
+
+  @include atSmall {
+    padding-top: 1em;
+  }
+
+  @include atMedium {
+    flex-direction: row;
+    padding-top: 1em;
+  }
+}

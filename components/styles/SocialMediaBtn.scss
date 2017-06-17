@@ -1,0 +1,30 @@
+.btn-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  @include atMedium {
+    width: 50%;
+    text-align: center;
+  }
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 10px 20px;
+  // transition: background ease 0.3s;
+}
+
+.btn-wrapper:hover > .overlay {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.text {
+  font-size: 1.5rem;
+  color: white;
+  margin-left: 10px;
+}

@@ -1,0 +1,76 @@
+.panel-custom {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 0;
+  cursor: pointer;
+  @include atMedium {
+    font-size: 2rem;
+  }
+  @include atLarge {
+    font-size: 2.5rem;
+  }
+  @include atSuperLarge {
+    font-size: 2.5rem;
+  }
+}
+
+.panel-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding: 0.3em 0 0.5em 0;
+  @include atSmall {
+    padding: 0.4em 0 0.7em 0;
+  }
+  @include atMediumSmall {
+    padding: 0.4em 0 1em 0;
+  }
+  @include atMedium {
+    padding: 1em;
+  }
+}
+
+.panel-wrapper-engraved {
+  @include atMedium {
+    background: $slide-bar-wrapper-color;
+    box-shadow: $engraved-shadow;
+    border-radius: 10% 10% 0 0;
+  }
+}
+
+.btns-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 92%;
+  right: 0;
+  @include atSmall {
+    height: 85%;
+  }
+  @include atMediumSmall {
+    height: 80%;
+  }
+  @include atMedium {
+    display: none;
+  }
+}
+
+.btn-plus {
+  font-size: 1rem;
+  border-radius: 0 5px 0 0;
+  flex: 1;
+  @include atMediumSmall {
+    font-size: 1.5rem;
+  }
+}
+
+.btn-minus {
+  font-size: 1rem;
+  border-radius: 0 0 5px 0;
+  flex: 1;
+  @include atMediumSmall {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,7 @@
+.panel-custom {
+  font-size: 1.25rem;
+  cursor: pointer;
+  @include atMedium {
+    font-size: 2rem;
+  }
+}

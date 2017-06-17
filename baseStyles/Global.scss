@@ -1,0 +1,177 @@
+:global {
+  #root {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  /* Override the original style of bootstrap */
+  // alert dialog
+  .alert {
+    margin-bottom: 0px;
+  }
+
+  // button
+  .btn-group-lg > .btn, .btn-lg {
+    font-size: 1em;
+    padding: 5px 8px;
+    @include atMediumSmall {
+      padding: 8px 10px;
+    }
+    @include atMedium {
+      font-size: 2em;
+      padding: 10px 16px;
+    }
+  }
+
+  .btn-lg .caret {
+    position: absolute;
+    right: 1%;
+    top: 45%;
+    border-width: 0.4em 0.4em 0;
+  }
+
+  // progress bar
+  .progress {
+    margin-bottom: 3px;
+  }
+
+  // dropdown menu
+  .dropdown {
+    display: flex;
+    justify-content: center;
+  }
+
+  .dropdown.open {
+    position: relative;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: table;
+    width: 100%;
+    font-size: 1em;
+    left: auto;
+    right: auto;
+    text-align: center;
+
+    @include atMedium {
+      font-size: 2em;
+    }
+  }
+
+  .dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
+    background-color: $slide-bar-active-color;
+  }
+
+  // modal
+  .modal {
+    text-align: center;
+    padding: 0!important;
+  }
+
+  .modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+  }
+
+  .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .dialog-footer-btn {
+    width: 100%;
+  }
+
+  // form
+  .form-group {
+    margin-bottom: 0px;
+  }
+
+  // panel
+  .panel-heading {
+    padding: 8px 8px;
+  }
+
+  .panel-body {
+    padding: 8px 8px;
+  }
+
+  /* Override the original style of react-input-range */
+  .input-range {
+    display: none;
+    margin: 0 0 2.5em 0;
+    @include atMedium {
+      display: block;
+      margin: 2em 0 4em 0;
+    }
+  }
+
+  .input-range__slider {
+    height: 1em;
+    width: 1em;
+    margin-left: -1em;
+    margin-top: -0.7em;
+    background: $slide-bar-active-color;
+    border: 1px solid $slide-bar-active-color;
+    box-shadow: $shadow;
+    @include atMedium {
+      height: 2em;
+      width: 2em;
+      margin-left: -1em;
+      margin-top: -1.5em;
+    }
+  }
+
+  .input-range__track {
+    height: 0.5em;
+    box-shadow: $shadow;
+    @include atMedium {
+      height: 1em;
+    }
+  }
+
+  .input-range__track--background {
+    background: $menu-bg;
+  }
+
+  .input-range__track--active {
+    background: $slide-bar-active-color;
+  }
+
+  .input-range__label-container {
+    display: none;
+    font-size: 1.5rem;
+    @include atMedium {
+      font-size: 3rem;
+    }
+  }
+
+  .input-range__label--min, .input-range__label--max {
+    bottom: -3.5em;
+    @include atMedium {
+      bottom: -6em;
+    }
+  }
+
+  .input-range__label--value {
+    top: -4em;
+    left: -1em;
+    @include atMedium {
+      top: -7.5em;
+      left: 0;
+    }
+  }
+
+  /* Custom */
+  .hint-error {
+    color: #a94442;
+  }
+}

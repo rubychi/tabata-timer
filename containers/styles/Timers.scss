@@ -1,0 +1,9 @@
+.timers-wrapper {
+  overflow-y: scroll;
+  padding: 0 1em 0 1em;
+  margin-top: 1em;
+  background: $app-bg-color;
+  @include atMedium {
+    margin-top: 2em;
+  }
+}

@@ -1,0 +1,10 @@
+.dropdownbtn-custom {
+  width: 100%;
+  @include atMedium {
+    font-size: 0.5em;
+  }
+}
+
+.input-preset {
+  width: 100%;
+}
