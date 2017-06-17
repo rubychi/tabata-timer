@@ -11,7 +11,8 @@ class SettingSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pressSettingBtn: false,
+      pressPlusBtn: false,
+      pressMinusBtn: false,
     };
   }
 
@@ -56,9 +57,11 @@ class SettingSection extends Component {
             title={item.title}
             value={item.value}
             open={this.state[item.title]}
-            pressBtn={this.state.pressSettingBtn}
+            pressPlusBtn={this.state.pressPlusBtn}
+            pressMinusBtn={this.state.pressMinusBtn}
             onClickSetting={this.toggleSettings}
-            onPressBtn={(press) => this.setState({ pressSettingBtn: press })}
+            onPressPlusBtn={() => this.setState({ pressPlusBtn: true, pressMinusBtn: false })}
+            onPressMinusBtn={() => this.setState({ pressMinusBtn: true, pressPlusBtn: false })}
           />
         ))}
       </div>

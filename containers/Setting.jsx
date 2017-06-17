@@ -13,7 +13,8 @@ class Setting extends Component {
 
     this.state = {
       timerId: null,
-      pressBtn: props.pressBtn,
+      pressPlusBtn: props.pressPlusBtn,
+      pressMinusBtn: props.pressMinusBtn,
     };
     this.tick = this.tick.bind(this);
   }
@@ -28,12 +29,21 @@ class Setting extends Component {
   }
 
   tick() {
-    if (this.state.pressBtn && this.props.open) {
-      this.props.setSetting({
-        preset: this.props.preset,
-        setting: this.props.title,
-        value: this.props.value < 100 ? this.props.value + 1 : 100,
-      })
+    if (this.props.open) {
+      if (this.state.pressPlusBtn) {
+        this.props.setSetting({
+          preset: this.props.preset,
+          setting: this.props.title,
+          value: this.props.value < 100 ? this.props.value + 1 : 100,
+        });
+      }
+      if (this.state.pressMinusBtn) {
+        this.props.setSetting({
+          preset: this.props.preset,
+          setting: this.props.title,
+          value: this.props.value > 1 ? this.props.value - 1 : 1,
+        })
+      }
     }
   }
 
@@ -58,7 +68,7 @@ class Setting extends Component {
                 value: this.props.value < 100 ? this.props.value + 1 : 100,
               })
             }}
-            onPress={() => this.props.onPressBtn(true)}
+            onPress={() => this.props.onPressPlusBtn()}
           >
             <Glyphicon glyph="plus" />
           </TapAndPinchable>
@@ -73,7 +83,7 @@ class Setting extends Component {
                 value: this.props.value > 1 ? this.props.value - 1 : 1,
               })
             }}
-            onPress={() => this.props.onPressBtn(true)}
+            onPress={() => this.props.onPressMinusBtn()}
           >
             <Glyphicon glyph="minus" />
           </TapAndPinchable>

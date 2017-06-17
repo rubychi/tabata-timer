@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // import _ from 'lodash';
 import { FormControl, HelpBlock } from 'react-bootstrap';
 import CSSModules from 'react-css-modules';
+import { googleImg, fbImg } from '../global';
 // import { setSetting } from '../actions/setSetting';
 import SocialMediaBtn from '../components/SocialMediaBtn';
 import styles from './styles/SignInNSignUp';
@@ -69,8 +70,8 @@ class SignUp extends Component {
     return (
       <div styleName="wrapper">
         { /* TODO: can't resolve the correct path by simply put the image name, ex. google-icon-50x50 (file-loder isn't working?) */ }
-        <SocialMediaBtn imgSrc="/assets/images/google-icon-50x50.png" bgColor="#DC4E41" text="Connect with Google" height="25px" />
-        <SocialMediaBtn imgSrc="/assets/images/facebook-icon-50x50.png" bgColor="#475993" text="Connect with Facebook" height="20px" />
+        <SocialMediaBtn imgSrc={googleImg} bgColor="#DC4E41" text="Connect with Google" height="25px" />
+        <SocialMediaBtn imgSrc={fbImg} bgColor="#475993" text="Connect with Facebook" height="20px" />
         <div styleName="line-breaks-wrapper">
           <hr /><span styleName="line-break-text">or</span><hr />
         </div>
