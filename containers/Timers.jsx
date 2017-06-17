@@ -43,7 +43,7 @@ class Timers extends Component {
     if (nextProps.startTimer) {
       if (!this.state.kickStart) {
         this.setState({ kickStart: true, playSound: true });
-        setTimeout(() => this.setState({ playSound: false }));
+        // setTimeout(() => this.setState({ playSound: false }));
       }
     }
   }
