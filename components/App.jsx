@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 import { Button, Glyphicon } from 'react-bootstrap';
+import MobileDetect from 'mobile-detect';
 import SignInDialog from './SignInDialog';
 import Subject from './Subject';
 import Menu from '../containers/Menu';
@@ -13,6 +14,7 @@ class App extends Component {
 
     this.state = {
       user: '',
+      phone: new MobileDetect(window.navigator.userAgent).phone(),
       title: 'Tabata Timer',
       openMenu: false,
       changePreset: false,
@@ -22,9 +24,11 @@ class App extends Component {
       activeSubject: 'Welcome',
     };
     this.renderSignInNSignOutHref = this.renderSignInNSignOutHref.bind(this);
-    this.renderMenu = this.renderMenu.bind(this);
     this.renderMenuBtn = this.renderMenuBtn.bind(this);
     this.renderPlayBtn = this.renderPlayBtn.bind(this);
+    this.renderMenu = this.renderMenu.bind(this);
+    this.renderContent = this.renderContent.bind(this);
+    this.renderTimers = this.renderTimers.bind(this);
   }
   componentWillMount() {}
   componentDidMount() {}
@@ -63,29 +67,6 @@ class App extends Component {
         </a>
       );
     }
-  }
-
-  renderMenu() {
-    if (this.state.openMenu) {
-      return (
-        <Menu
-          user={this.state.user}
-          openMenu={this.state.openMenu}
-          onChangePreset={() => {
-            this.setState({ changePreset: true, play: false, activeSubject: 'Welcome' });
-            setTimeout(() => this.setState({ changePreset: false }));
-          }}
-          onChangeSettings={(changeSetting) => {
-            let newState = { changeSetting };
-            if (changeSetting) {
-              newState.play = false;
-            }
-            this.setState(newState);
-          }}
-        />
-      );
-    }
-    return null;
   }
 
   renderMenuBtn() {
@@ -134,6 +115,74 @@ class App extends Component {
     );
   }
 
+  renderMenu() {
+    if (this.state.openMenu) {
+      return (
+        <Menu
+          user={this.state.user}
+          openMenu={this.state.openMenu}
+          onChangePreset={() => {
+            this.setState({ changePreset: true, play: false, activeSubject: 'Welcome' });
+            setTimeout(() => this.setState({ changePreset: false }));
+          }}
+          onChangeSettings={(changeSetting) => {
+            let newState = { changeSetting };
+            if (changeSetting) {
+              newState.play = false;
+            }
+            this.setState(newState);
+          }}
+        />
+      );
+    }
+    return null;
+  }
+
+  renderContent() {
+    if (!this.state.openMenu || !this.state.phone) {
+      return (
+        <div styleName="subject-wrapper">
+          <Subject title={this.state.activeSubject} />
+          <div styleName="btns-wrapper">
+            { this.renderPlayBtn() }
+            <Button
+              styleName="resetbtn-custom"
+              bsSize="large"
+              onClick={() => {
+                this.setState({ reset: true, play: false, activeSubject: 'Welcome' });
+                setTimeout(() => this.setState({ reset: false }));
+              }}
+            >
+              <Glyphicon glyph="repeat" />
+            </Button>
+          </div>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  renderTimers() {
+    if (!this.state.openMenu || !this.state.phone) {
+      return (
+        <Timers
+          reset={this.state.reset}
+          changePreset={this.state.changePreset}
+          changeSetting={this.state.changeSetting}
+          startTimer={this.state.play}
+          onStartCycle={(activeSubject) => {
+            if (activeSubject === 'Finished') {
+              this.setState({ activeSubject, play: false });
+            } else {
+              this.setState({ activeSubject });
+            }
+          }}
+        />
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
       <div styleName="app-wrapper">
@@ -149,36 +198,9 @@ class App extends Component {
             { this.renderMenuBtn() }
           </div>
           { this.renderMenu() }
-          <div styleName="subject-wrapper">
-            <Subject title={this.state.activeSubject} />
-            <div styleName="btns-wrapper">
-              { this.renderPlayBtn() }
-              <Button
-                styleName="resetbtn-custom"
-                bsSize="large"
-                onClick={() => {
-                  this.setState({ reset: true, play: false, activeSubject: 'Welcome' });
-                  setTimeout(() => this.setState({ reset: false }));
-                }}
-              >
-                <Glyphicon glyph="repeat" />
-              </Button>
-            </div>
-          </div>
+          { this.renderContent() }
         </header>
-        <Timers
-          reset={this.state.reset}
-          changePreset={this.state.changePreset}
-          changeSetting={this.state.changeSetting}
-          startTimer={this.state.play}
-          onStartCycle={(activeSubject) => {
-            if (activeSubject === 'Finished') {
-              this.setState({ activeSubject, play: false });
-            } else {
-              this.setState({ activeSubject });
-            }
-          }}
-        />
+        { this.renderTimers() }
       </div>
     );
   }
