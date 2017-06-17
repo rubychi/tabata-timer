@@ -47,6 +47,7 @@ class Setting extends Component {
           {this.props.value}
         </Panel>
         <div styleName={this.props.open ? "btns-wrapper" : "hidden"}>
+          {/* TODO: there is no listener for detecting the end of press event! */}
           <TapAndPinchable
             styleName="btn-plus"
             className="btn btn-lg btn-default"
@@ -58,21 +59,21 @@ class Setting extends Component {
               })
             }}
             onPress={() => this.props.onPressBtn(true)}
-            onTouchEnd={() => this.props.onPressBtn(false)}
           >
             <Glyphicon glyph="plus" />
           </TapAndPinchable>
+          {/* TODO: there is no listener for detecting the end of press event! */}
           <TapAndPinchable
             styleName="btn-minus"
             className="btn btn-lg btn-default"
-            onClick={(e) => {
-              e.stopPropagation();
+            onTap={() => {
               this.props.setSetting({
                 preset: this.props.preset,
                 setting: this.props.title,
                 value: this.props.value > 1 ? this.props.value - 1 : 1,
-              })}
-            }
+              })
+            }}
+            onPress={() => this.props.onPressBtn(true)}
           >
             <Glyphicon glyph="minus" />
           </TapAndPinchable>
