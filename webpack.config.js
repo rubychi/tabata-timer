@@ -113,11 +113,19 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
     }),
+    /* For production only */
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        drop_console: true,
+      },
+    }),
     new HtmlWebpackPlugin({
       template: './index-template.html',
     }),
     new webpack.LoaderOptionsPlugin({
       options: {
+        debug: false,
         postcss: [
           autoprefixer,
         ],
@@ -132,5 +140,6 @@ module.exports = {
     inline: true,
     port: 8080,
   },
-  devtool: 'source-map',
+  /* For development only */
+  // devtool: 'source-map',
 };
