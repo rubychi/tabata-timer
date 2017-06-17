@@ -224,7 +224,7 @@ class Timers extends Component {
         {this.renderTimers()}
         <Sound
           url="https://www.soundjay.com/button/sounds/beep-02.mp3"
-          playStatus={this.state.playSound ? Sound.status.PLAYING : Sound.status.STOPPED}
+          playStatus={this.props.startTimer ? Sound.status.PLAYING : Sound.status.STOPPED}
           onFinishedPlaying={() => this.setState({ playSound: false })}
         />
         <Modal
