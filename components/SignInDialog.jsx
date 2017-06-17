@@ -67,6 +67,7 @@ class SignInDialog extends Component {
     return (
       <div>
         <Modal
+          styleName="modal-custom"
           show={this.state.showSignInDialog}
           onHide={this.closeSignInDialog}
         >

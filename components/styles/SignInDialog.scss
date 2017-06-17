@@ -2,3 +2,10 @@ hr {
   width: 120px;
   margin: 10px 5px;
 }
+
+.modal-custom {
+  left: auto;
+  @include atSmall {
+    left: 0;
+  }
+}

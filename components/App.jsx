@@ -51,7 +51,7 @@ class App extends Component {
         <a
           styleName="signInNSignOut-href"
           role="link"
-          onClick={() => this.setState({ user: '' })}
+          onClick={() => this.setState({ user: '', play: false })}
         >
           <Glyphicon glyph="user" /> Sign Out
         </a>
@@ -61,7 +61,7 @@ class App extends Component {
         <a
           styleName="signInNSignOut-href"
           role="link"
-          onClick={() => this.setState({ showSignInDialog: true })}
+          onClick={() => this.setState({ showSignInDialog: true, play: false })}
         >
           <Glyphicon glyph="user" /> Sign In
         </a>
@@ -92,7 +92,11 @@ class App extends Component {
         styleName="btn-menu"
         bsSize="large"
         onClick={() =>
-          this.setState({ openMenu: true })
+          this.setState({
+            openMenu: true,
+            play: false,
+            activeSubject: 'Welcome',
+          })
         }
       >
         <Glyphicon glyph="menu-hamburger" />
@@ -167,10 +171,12 @@ class App extends Component {
       return (
         <Timers
           reset={this.state.reset}
+          openMenu={this.state.openMenu}
           changePreset={this.state.changePreset}
           changeSetting={this.state.changeSetting}
           startTimer={this.state.play}
-          onStartCycle={(activeSubject) => {
+          onShowModifyNameDialog={() => this.setState({ play: false })}
+          onChangeSubject={(activeSubject) => {
             if (activeSubject === 'Finished') {
               this.setState({ activeSubject, play: false });
             } else {

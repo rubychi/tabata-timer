@@ -36,14 +36,16 @@ class Timers extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.reset || nextProps.changePreset || nextProps.changeSetting) {
+    if (nextProps.openMenu || nextProps.reset || nextProps.changePreset || nextProps.changeSetting) {
       this.initState(nextProps.activePreset);
+      /* A workaround for solving audio issue on mobile devices */
+      this.setState({ kickStart: false });
     }
 
+    /* A workaround for solving audio issue on mobile devices */
     if (nextProps.startTimer) {
       if (!this.state.kickStart) {
         this.setState({ kickStart: true, playSound: true });
-        // setTimeout(() => this.setState({ playSound: false }));
       }
     }
   }
@@ -53,16 +55,22 @@ class Timers extends Component {
   }
 
   modifyName(id, modifyName) {
+    this.props.onShowModifyNameDialog();
     this.setState({ showModifyTitleDialog: true, modifyId: id, modifyName });
   }
 
   saveModifiedName() {
-    if (!this.modifyNameInput.value.trim()) {
+    const value = this.modifyNameInput.value;
+    if (!value.trim()) {
       this.setState({ titleValidationState: 'error' });
     } else {
       let newCycles = _.cloneDeep(this.state.cycles);
       const idx = _.findIndex(newCycles, { id: this.state.modifyId });
-      newCycles[idx].title = this.modifyNameInput.value;
+      newCycles[idx].title = value;
+      // If it's current active subject then change the title right away
+      if (idx === 0) {
+        this.props.onChangeSubject(`T${this.state.curTabata}: ${value}`);
+      }
       this.props.setTitles({
         id: this.props.activePreset.id,
         titles: _.sortBy(newCycles, 'origIdx').map((item) => { return(item.title); })
@@ -81,15 +89,15 @@ class Timers extends Component {
 
   tick() {
     if (this.props.startTimer) {
-      if (this.state.curTabatas <= this.state.tabatas) {
+      if (this.state.curTabata <= this.state.tabatas) {
         let newState = _.cloneDeep(this.state);
         let curCycle = newState.cycles[0];
         let finCycleFlag = false;
         if (curCycle.prepareActive !== undefined) {
           if (!curCycle.prepareActive) {
             curCycle.prepareActive = true;
-            newState.curTabatas += 1;
-            if (newState.curTabatas <= this.state.tabatas) {
+            newState.curTabata += 1;
+            if (newState.curTabata <= this.state.tabatas) {
               // The previous round has been finished
               if (!curCycle.prepare) {
                 curCycle.prepare = 100;
@@ -100,7 +108,7 @@ class Timers extends Component {
                 });
                 newState.cycles = [curCycle, ...restCycles];
               }
-              this.props.onStartCycle(`T${newState.curTabatas}: ${newState.cycles[0].title}`);
+              this.props.onChangeSubject(`T${newState.curTabata}: ${newState.cycles[0].title}`);
             }
           } else {
             if (curCycle.prepare) {
@@ -110,7 +118,7 @@ class Timers extends Component {
               }
             } else {
               curCycle.prepareActive = false;
-              if (newState.curTabatas <= this.state.tabatas) {
+              if (newState.curTabata <= this.state.tabatas) {
                 finCycleFlag = true;
               }
             }
@@ -118,7 +126,7 @@ class Timers extends Component {
         } else {
           if (!curCycle.workActive && !curCycle.restActive) {
             curCycle.workActive = true;
-            this.props.onStartCycle(`T${newState.curTabatas}: ${newState.cycles[0].title}`);
+            this.props.onChangeSubject(`T${newState.curTabata}: ${newState.cycles[0].title}`);
           } else if (curCycle.workActive) {
             if (curCycle.work) {
               curCycle.work -= (100 / this.state.work);
@@ -151,7 +159,7 @@ class Timers extends Component {
         this.setState(newState);
       } else {
         this.initState(this.props.activePreset);
-        this.props.onStartCycle('Finished');
+        this.props.onChangeSubject('Finished');
       }
     }
   }
@@ -168,7 +176,7 @@ class Timers extends Component {
       prepare: presetSettings.prepare,
       work: presetSettings.work,
       rest: presetSettings.rest,
-      curTabatas: 0,
+      curTabata: 0,
       cycles: [{
         id: uuidV4(),
         origIdx: 0,
@@ -253,7 +261,13 @@ class Timers extends Component {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button className="dialog-footer-btn" bsStyle="primary" onClick={this.saveModifiedName}>Ok</Button>
+            <Button
+              className="dialog-footer-btn"
+              bsStyle="primary"
+              onClick={this.saveModifiedName}
+            >
+              Ok
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>

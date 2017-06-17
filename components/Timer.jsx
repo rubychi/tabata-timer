@@ -9,19 +9,50 @@ const Timer = (props) => {
 
   let progressBars = [];
   if (p1Active) {
-    progressBars.push(<ProgressBar key={uuidV4()} bsStyle={p1Style} now={progress1} active />);
+    progressBars.push(
+      <ProgressBar
+        key={uuidV4()}
+        bsStyle={p1Style}
+        now={progress1}
+        active
+      />
+    );
   } else {
-    progressBars.push(<ProgressBar key={uuidV4()} bsStyle={p1Style} now={progress1} />);
+    progressBars.push(
+      <ProgressBar
+        key={uuidV4()}
+        bsStyle={p1Style}
+        now={progress1}
+      />
+    );
   }
   if (progress2 !== null) {
     if (p2Active) {
-      progressBars.push(<ProgressBar key={uuidV4()} bsStyle={p2Style} now={progress2} active />);
+      progressBars.push(
+        <ProgressBar
+          key={uuidV4()}
+          bsStyle={p2Style}
+          now={progress2}
+          active
+        />
+      );
     } else {
-      progressBars.push(<ProgressBar key={uuidV4()} bsStyle={p2Style} now={progress2} />);
+      progressBars.push(
+        <ProgressBar
+          key={uuidV4()}
+          bsStyle={p2Style}
+          now={progress2}
+        />
+      );
     }
   }
   return (
-    <Panel styleName="panel-custom" header={title} eventKey="1" onClick={() => props.onModifyName(props.id, title)}>
+    <Panel
+      styleName="panel-custom"
+      header={title}
+      eventKey="1"
+      onClick={() => props.onModifyName(props.id, title)}
+    >
       {progressBars}
     </Panel>
   );
