@@ -20,7 +20,7 @@ class Setting extends Component {
   }
 
   componentWillMount() {
-    const timerId = setInterval(this.tick, 100);
+    const timerId = setInterval(this.tick, 50);
     this.setState({ timerId });
   }
 
@@ -29,7 +29,7 @@ class Setting extends Component {
   }
 
   tick() {
-    if (this.props.open) {console.log(this.state);
+    if (this.props.open) {
       if (this.state.pressPlusBtn) {
         this.props.setSetting({
           preset: this.props.preset,
