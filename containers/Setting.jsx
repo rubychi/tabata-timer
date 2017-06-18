@@ -29,7 +29,7 @@ class Setting extends Component {
   }
 
   tick() {
-    if (this.props.open) {
+    if (this.props.open) {console.log(this.state);
       if (this.state.pressPlusBtn) {
         this.props.setSetting({
           preset: this.props.preset,

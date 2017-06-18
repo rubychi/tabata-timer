@@ -113,11 +113,11 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
     }),
-    /* For production only */
+    /* For pro only */
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
-        drop_console: true,
+        //drop_console: true,
       },
     }),
     new HtmlWebpackPlugin({
