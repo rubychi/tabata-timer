@@ -69,7 +69,7 @@ class Timers extends Component {
       newCycles[idx].title = value;
       // If it's current active subject then change the title right away
       if (idx === 0) {
-        this.props.onChangeSubject(`T${this.state.curTabata}: ${value}`);
+        this.props.onChangeSubject(`T${this.state.curTabata + 1}: ${value}`);
       }
       this.props.setTitles({
         id: this.props.activePreset.id,
