@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import CSSModules from 'react-css-modules';
 import { Button, Glyphicon } from 'react-bootstrap';
 import MobileDetect from 'mobile-detect';
-import SignInDialog from './SignInDialog';
-import Subject from './Subject';
-import Menu from '../containers/Menu';
-import Timers from '../containers/Timers';
+import Menu from './Menu';
+import Timers from './Timers';
+import SignInNSignUpDialog from '../components/SignInNSignUpDialog';
+import Subject from '../components/Subject';
+import signOut from '../actions/signOut';
 import styles from './styles/App';
 
 class App extends Component {
@@ -13,7 +15,7 @@ class App extends Component {
     super();
 
     this.state = {
-      user: '',
+      signIn: false,
       phone: new MobileDetect(window.navigator.userAgent).phone(),
       title: 'Tabata Timer',
       openMenu: false,
@@ -46,12 +48,15 @@ class App extends Component {
    */
 
   renderSignInNSignOutHref() {
-    if (this.state.user) {
+    if (this.state.signIn) {
       return (
         <a
           styleName="signInNSignOut-href"
           role="link"
-          onClick={() => this.setState({ user: '', play: false })}
+          onClick={() => {
+            this.props.signOut();
+            this.setState({ signIn: false, play: false });
+          }}
         >
           <Glyphicon glyph="user" /> Sign Out
         </a>
@@ -207,10 +212,11 @@ class App extends Component {
               { this.state.title }
             </span>
             { this.renderSignInNSignOutHref() }
-            <SignInDialog
+            <SignInNSignUpDialog
               title={this.state.title}
               show={this.state.showSignInDialog}
               onClose={() => this.setState({ showSignInDialog: false })}
+              onSignInOrSignUp={() => this.setState({ signIn: true, showSignInDialog: false })}
             />
             { this.renderMenuBtn() }
           </div>
@@ -227,4 +233,4 @@ App.contextTypes = {
   store: React.PropTypes.object,
 };
 
-export default CSSModules(App, styles);
+export default connect(null, { signOut })(CSSModules(App, styles));

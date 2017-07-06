@@ -6,7 +6,7 @@ import CSSModules from 'react-css-modules';
 import { googleImg, fbImg } from '../global';
 // import { setSetting } from '../actions/setSetting';
 import SocialMediaBtn from '../components/SocialMediaBtn';
-import { signup } from '../actions/signup';
+import signUp from '../actions/signUp';
 import styles from './styles/SignInNSignUp';
 
 class SignUp extends Component {
@@ -14,6 +14,7 @@ class SignUp extends Component {
     super(props);
 
     this.state = {
+      errorMessage: null,
       usernameValidationState: null,
       emailValidationState: null,
       pwdValidationState: null,
@@ -76,6 +77,7 @@ class SignUp extends Component {
         <div styleName="line-breaks-wrapper">
           <hr /><span styleName="line-break-text">or</span><hr />
         </div>
+        { this.state.errorMessage ? <HelpBlock className="show" style={{ color: '#a94442' }}>{ this.state.errorMessage }</HelpBlock> : null }
         <div styleName="input" className={this.state.emailValidationState ? `form-group has-${this.state.emailValidationState}` : 'form-group'}>
           <FormControl
             inputRef={(ref) => { this.emailInput = ref; }}
@@ -85,7 +87,7 @@ class SignUp extends Component {
             placeholder="Email address"
             onBlur={this.validateEmail}
           />
-          <HelpBlock className={this.state.emailValidationState ? 'show' : 'hidden'}>The Email Address is in an invalid format</HelpBlock>
+          { this.state.emailValidationState ? <HelpBlock className="show">The Email Address is in an invalid format</HelpBlock> : null }
         </div>
         <div styleName="input" className={this.state.pwdValidationState ? `form-group has-${this.state.pwdValidationState}` : 'form-group'}>
           <FormControl
@@ -102,7 +104,7 @@ class SignUp extends Component {
               }
             }}
           />
-          <HelpBlock className={this.state.pwdValidationState ? 'show' : 'hidden'}>Password must be at least 8 characters</HelpBlock>
+          { this.state.pwdValidationState ? <HelpBlock className="show">Password must be at least 8 characters</HelpBlock> : null }
         </div>
         <div styleName="input" className={this.state.pwdConfirmValidationState ? `form-group has-${this.state.pwdConfirmValidationState}` : 'form-group'}>
           <FormControl
@@ -113,12 +115,12 @@ class SignUp extends Component {
             placeholder="Confirm password"
             onBlur={this.validatePwdConfirm}
           />
-          <HelpBlock className={this.state.pwdConfirmValidationState ? 'show' : 'hidden'}>Passwords don't match</HelpBlock>
+          { this.state.pwdConfirmValidationState ? <HelpBlock className="show">Passwords don't match</HelpBlock> : null }
         </div>
         <span styleName="create-account-text">Already a member?
           <a
             styleName="signInNSignUp-href"
-            onClick={this.props.onClickSignIn}
+            onClick={this.props.onClickSignInHref}
             role="link"
           >
             {' '}Sign in
@@ -132,6 +134,25 @@ class SignUp extends Component {
             type="button"
             className="dialog-footer-btn btn btn-success"
             styleName="signInNSignUp-btn"
+            onClick={() => {
+              this.validateEmail();
+              this.validatePwd();
+              this.validatePwdConfirm();
+              const email = this.emailInput.value;
+              const password = this.pwdInput.value;
+              const passwordConfirm = this.pwdConfirmInput.value;
+              if (email && password && passwordConfirm) {
+                if (!this.state.emailValidationState && !this.state.pwdValidationState && !this.state.pwdConfirmValidationState) {
+                  this.props.signUp({ email, password }, (errorMessage) => {
+                    if (errorMessage) {
+                      this.setState({ errorMessage });
+                    } else {
+                      this.props.onSignUp();
+                    }
+                  });
+                }
+              }
+            }}
           >
             Sign up
           </button>
@@ -141,4 +162,4 @@ class SignUp extends Component {
   }
 }
 
-export default connect(null, { signup })(CSSModules(SignUp, styles, { allowMultiple: true }));
+export default connect(null, { signUp })(CSSModules(SignUp, styles, { allowMultiple: true }));

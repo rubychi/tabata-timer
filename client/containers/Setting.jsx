@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Panel, Button, Glyphicon } from 'react-bootstrap';
 import TapAndPinchable from 'react-tappable';
 import CSSModules from 'react-css-modules';
-import { setSetting } from '../actions/setSetting';
+import setSetting from '../actions/setSetting';
 import styles from './styles/Setting';
 
 class Setting extends Component {
@@ -17,6 +17,7 @@ class Setting extends Component {
       pressMinusBtn: props.pressMinusBtn,
     };
     this.tick = this.tick.bind(this);
+    this.renderPanelBtns = this.renderPanelBtns.bind(this);
   }
 
   componentWillMount() {
@@ -47,16 +48,10 @@ class Setting extends Component {
     }
   }
 
-  render() {
-    return (
-      <div
-        styleName={this.props.open ? "panel-wrapper panel-wrapper-engraved" : "panel-wrapper"}
-        onClick={() => this.props.onClickSetting(this.props.title)}
-      >
-        <Panel header={this.props.title} styleName="panel-custom" bsClass="panel" bsStyle="info">
-          {this.props.value}
-        </Panel>
-        <div styleName={this.props.open ? "btns-wrapper" : "hidden"}>
+  renderPanelBtns() {
+    if (this.props.open) {
+      return (
+        <div styleName="btns-wrapper">
           {/* TODO: there is no listener for detecting the end of press event! */}
           <TapAndPinchable
             styleName="btn-plus"
@@ -88,6 +83,21 @@ class Setting extends Component {
             <Glyphicon glyph="minus" />
           </TapAndPinchable>
         </div>
+      );
+    }
+    return null;
+  }
+
+  render() {
+    return (
+      <div
+        styleName={this.props.open ? "panel-wrapper panel-wrapper-engraved" : "panel-wrapper"}
+        onClick={() => this.props.onClickSetting(this.props.title)}
+      >
+        <Panel header={this.props.title} styleName="panel-custom" bsClass="panel" bsStyle="info">
+          {this.props.value}
+        </Panel>
+        { this.renderPanelBtns() }
       </div>
     );
   }

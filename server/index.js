@@ -13,13 +13,13 @@ const genAuthToken = require('./utils/genAuthToken');
 const app = express();
 const PORT = process.env.PORT;
 
-if (process.env.NODE_ENV === 'test' && process.env.NODE_ENV === 'development') {
-
+if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
+  const cors = require('cors');
+  app.use(cors());
 } else {
-  // app.use(express.static('build'));
+  app.use(express.static('build'));
 }
 app.use(bodyParser.json());
-// app.use(cors());
 
 app.post('/signin', authSignin, (req, res) => {
   return res.send({ token: genAuthToken(req.user) });

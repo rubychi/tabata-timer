@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --inline",
     "prebuild": "rm -rf ./build",
-    "build": "NODE_ENV=production webpack -p --config webpack.prod.config"
+    "build": "webpack -p --config webpack.prod.config"
   },
   "author": "",
   "license": "ISC",

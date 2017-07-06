@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 // import _ from 'lodash';
 import { FormControl, HelpBlock } from 'react-bootstrap';
 import CSSModules from 'react-css-modules';
 import { googleImg, fbImg } from '../global';
 // import { setSetting } from '../actions/setSetting';
 import SocialMediaBtn from '../components/SocialMediaBtn';
+import signIn from '../actions/signIn';
 import styles from './styles/SignInNSignUp';
 
 class SignIn extends Component {
@@ -13,7 +14,7 @@ class SignIn extends Component {
     super(props);
 
     this.state = {
-      validationState: null,
+      errorMessage: null,
     };
   }
 
@@ -32,15 +33,17 @@ class SignIn extends Component {
         <div styleName="line-breaks-wrapper">
           <hr /><span styleName="line-break-text">or</span><hr />
         </div>
-        <HelpBlock className={this.state.validationState ? 'show hint-error' : 'hidden'}>Incorrect email or password</HelpBlock>
+        { this.state.errorMessage ? <HelpBlock className="show hint-erro" style={{ color: '#a94442' }}>Incorrect email or password</HelpBlock> : null }
         <div styleName="input" className={this.state.validationState ? `form-group has-${this.state.validationState}` : 'form-group'}>
           <FormControl
+            inputRef={(ref) => { this.emailInput = ref; }}
             id="formControlsEmail"
             type="email"
             label="Email"
             placeholder="Email address"
           />
           <FormControl
+            inputRef={(ref) => { this.pwdInput = ref; }}
             style={{ marginTop: '10px' }}
             id="formControlsPassword"
             label="Password"
@@ -51,7 +54,7 @@ class SignIn extends Component {
         <span styleName="create-account-text">Don&apos;t have an account?
           <a
             styleName="signInNSignUp-href"
-            onClick={this.props.onClickSignUp}
+            onClick={this.props.onClickSignUpHref}
             role="link"
           >
             {' '}Sign up
@@ -65,6 +68,17 @@ class SignIn extends Component {
             type="button"
             className="dialog-footer-btn btn btn-primary"
             styleName="signInNSignUp-btn"
+            onClick={() => {
+              const email = this.emailInput.value;
+              const password = this.pwdInput.value;
+              this.props.signIn({ email, password }, (errorMessage) => {
+                if (errorMessage) {
+                  this.setState({ errorMessage });
+                } else {
+                  this.props.onSignIn();
+                }
+              });
+            }}
           >
             Sign in
           </button>
@@ -74,4 +88,4 @@ class SignIn extends Component {
   }
 }
 
-export default CSSModules(SignIn, styles, { allowMultiple: true });
+export default connect(null, { signIn })(CSSModules(SignIn, styles, { allowMultiple: true }));

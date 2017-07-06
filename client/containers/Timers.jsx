@@ -6,7 +6,7 @@ import uuidV4 from 'uuid/v4';
 import Sound from 'react-sound';
 import { Modal, Glyphicon, FormControl, Button } from 'react-bootstrap';
 import { getActivePreset } from '../selectors/presetsSelectors';
-import { setTitles } from '../actions/setTitles';
+import setTitles from '../actions/setTitles';
 import Timer from '../components/Timer';
 import styles from './styles/Timers';
 

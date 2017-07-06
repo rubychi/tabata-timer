@@ -1,6 +1,6 @@
 import { ADD_PRESET } from './';
 
-export function addPreset(payload) {
+export default function addPreset(payload) {
   return {
     type: ADD_PRESET,
     payload,

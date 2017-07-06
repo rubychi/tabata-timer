@@ -3,28 +3,28 @@ import { Modal, Glyphicon } from 'react-bootstrap';
 import CSSModules from 'react-css-modules';
 import SignIn from '../containers/SignIn';
 import SignUp from '../containers/SignUp';
-import styles from './styles/SignInDialog';
+import styles from './styles/SignInNSignUpDialog';
 
-class SignInDialog extends Component {
+class SignInNSignUpDialog extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isSignInPage: true,
-      showSignInDialog: false,
+      showSignInNSignUpDialog: false,
     };
     this.renderBody = this.renderBody.bind(this);
     this.closeSignInDialog = this.closeSignInDialog.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.show !== this.state.showSignInDialog) {
-      this.setState({ showSignInDialog: nextProps.show });
+    if (nextProps.show !== this.state.showSignInNSignUpDialog) {
+      this.setState({ showSignInNSignUpDialog: nextProps.show });
     }
   }
 
   closeSignInDialog() {
-    this.setState({ signIn: false, signUp: false, isSignInPage: true, showSignInDialog: false });
+    this.setState({ signIn: false, signUp: false, isSignInPage: true, showSignInNSignUpDialog: false });
     this.props.onClose();
   }
 
@@ -33,15 +33,26 @@ class SignInDialog extends Component {
       return (
         <SignIn
           signIn={this.state.signIn}
-          showSignInDialog={this.state.showSignInDialog}
-          onClickSignUp={() => this.setState({ isSignInPage: false })}
+          onSignIn={() => {
+            this.setState({ showSignInNSignUpDialog: false });
+            this.props.onSignInOrSignUp();
+          }}
+          showSignInNSignUpDialog={this.state.showSignInNSignUpDialog}
+          onClickSignUpHref={() => this.setState({ isSignInPage: false })}
         />
       );
     } else {
       return (
         <SignUp
           signUp={this.state.signUp}
-          onClickSignIn={() => this.setState({ isSignInPage: true })}
+          onSignUp={() => {
+            this.setState({
+              isSignInPage: true,
+              showSignInNSignUpDialog: false
+            });
+            this.props.onSignInOrSignUp();
+          }}
+          onClickSignInHref={() => this.setState({ isSignInPage: true })}
         />
       );
     }
@@ -52,7 +63,7 @@ class SignInDialog extends Component {
       <div>
         <Modal
           styleName="modal-custom"
-          show={this.state.showSignInDialog}
+          show={this.state.showSignInNSignUpDialog}
           onHide={this.closeSignInDialog}
         >
           <Modal.Header closeButton>
@@ -67,4 +78,4 @@ class SignInDialog extends Component {
   }
 }
 
-export default CSSModules(SignInDialog, styles, { allowMultiple: true });
+export default CSSModules(SignInNSignUpDialog, styles, { allowMultiple: true });

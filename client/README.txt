@@ -1,1 +1,0 @@
-To setup the environment, run command: npm install

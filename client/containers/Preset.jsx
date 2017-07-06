@@ -5,8 +5,8 @@ import { DropdownButton, MenuItem, Glyphicon, Modal, FormControl, HelpBlock, But
 import CSSModules from 'react-css-modules';
 import uuidV4 from 'uuid/v4';
 import { getActivePreset, getPresetsName } from '../selectors/presetsSelectors';
-import { addPreset } from '../actions/addPreset';
-import { changeActivePreset } from '../actions/changeActivePreset';
+import addPreset from '../actions/addPreset';
+import changeActivePreset from '../actions/changeActivePreset';
 import styles from './styles/Preset';
 
 class Preset extends Component {
@@ -94,7 +94,7 @@ class Preset extends Component {
                   }
                 }}
               />
-              <HelpBlock className={this.state.presetValidationState ? 'show hint-error' : 'hidden'}>Type name is empty or already exists</HelpBlock>
+              { this.state.presetValidationState ? <HelpBlock className="show hint-error">Type name is empty or already exists</HelpBlock> : null }
             </div>
           </Modal.Body>
           <Modal.Footer>

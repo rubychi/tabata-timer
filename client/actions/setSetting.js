@@ -1,6 +1,6 @@
 import { SET_SETTING } from './';
 
-export function setSetting(payload) {
+export default function setSetting(payload) {
   return {
     type: SET_SETTING,
     payload,
