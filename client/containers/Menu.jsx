@@ -28,7 +28,7 @@ class Menu extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextState) {
-    // If user saves the preset o closes the menu then automatically close all the settings
+    // If user saves the preset or closes the menu then automatically close all the settings
     if (!nextProps.openMenu) {
       if (this.state.activeSetting) {
         this.setState({ activeSetting: '' });

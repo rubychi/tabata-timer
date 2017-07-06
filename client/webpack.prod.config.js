@@ -2,25 +2,29 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+require('babel-polyfill');
 
 const VENDOR_LIBS = [
   'lodash',
+  'mobile-detect',
   'normalize.css',
   'prop-types',
   'react',
   'react-bootstrap',
   'react-dom',
+  'react-input-range',
   'react-redux',
-  'react-router',
+  'react-sound',
+  'react-tappable',
   'redux',
-  'redux-form',
   'redux-thunk',
+  'reselect',
   'uuid',
 ];
 
 module.exports = {
   entry: {
-    bundle: './index.jsx',
+    bundle: ['babel-polyfill', './index.jsx'],
     vendor: VENDOR_LIBS,
   },
   output: {
@@ -35,7 +39,7 @@ module.exports = {
           options: {
             presets: [
               ['es2015', { modules: false }],
-              'stage-2',
+              'stage-0',
               'react',
             ],
           },
@@ -49,14 +53,14 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
+              sourceMap: false,
             },
           },
           'resolve-url-loader',
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: true,
+              sourceMap: false,
             },
           },
         ],
@@ -68,7 +72,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
+              sourceMap: false,
               modules: true,
               importLoaders: '1',
               localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
@@ -78,13 +82,13 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: true,
+              sourceMap: false,
             },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true,
+              sourceMap: false,
             },
           },
           {
@@ -115,8 +119,8 @@ module.exports = {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: true,
-        drop_console: false,
+        warnings: false,
+        drop_console: true,
       },
     }),
     new HtmlWebpackPlugin({
@@ -124,7 +128,7 @@ module.exports = {
     }),
     new webpack.LoaderOptionsPlugin({
       options: {
-        debug: true,
+        debug: false,
         postcss: [
           autoprefixer,
         ],
@@ -134,10 +138,4 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
   },
-  devServer: {
-    // host: '0.0.0.0',
-    inline: true,
-    port: 8080,
-  },
-  devtool: 'source-map',
 };

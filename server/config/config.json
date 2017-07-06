@@ -1,0 +1,12 @@
+{
+  "test": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/TabataTimerTest",
+    "JWT_SECRET": "rfjfir045hoirgjepwo3wjeasoklfk;q"
+  },
+  "development": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/TabataTimer",
+    "JWT_SECRET": "r;fjrenoklwmqepofjpo4jkrl32;lfj"
+  }
+}

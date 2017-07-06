@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 // import _ from 'lodash';
 import { FormControl, HelpBlock } from 'react-bootstrap';
 import CSSModules from 'react-css-modules';
 import { googleImg, fbImg } from '../global';
 // import { setSetting } from '../actions/setSetting';
 import SocialMediaBtn from '../components/SocialMediaBtn';
+import { signup } from '../actions/signup';
 import styles from './styles/SignInNSignUp';
 
 class SignUp extends Component {
@@ -69,7 +70,7 @@ class SignUp extends Component {
   render() {
     return (
       <div styleName="wrapper">
-        { /* TODO: can't resolve the correct path by simply put the image name, ex. google-icon-50x50 (file-loder isn't working?) */ }
+        { /* TODO: can't resolve the correct path by simply put the image name, ex. google-icon-50x50 (file-loader isn't working?) */ }
         <SocialMediaBtn imgSrc={googleImg} bgColor="#DC4E41" text="Connect with Google" height="25px" />
         <SocialMediaBtn imgSrc={fbImg} bgColor="#475993" text="Connect with Facebook" height="20px" />
         <div styleName="line-breaks-wrapper">
@@ -115,11 +116,29 @@ class SignUp extends Component {
           <HelpBlock className={this.state.pwdConfirmValidationState ? 'show' : 'hidden'}>Passwords don't match</HelpBlock>
         </div>
         <span styleName="create-account-text">Already a member?
-          <a styleName="signInNSignUp-href" onClick={this.props.onClickSignIn}> Sign in</a>
+          <a
+            styleName="signInNSignUp-href"
+            onClick={this.props.onClickSignIn}
+            role="link"
+          >
+            {' '}Sign in
+          </a>
         </span>
+        <div
+          className="modal-footer"
+          styleName="signInNSignUp-footer"
+        >
+          <button
+            type="button"
+            className="dialog-footer-btn btn btn-success"
+            styleName="signInNSignUp-btn"
+          >
+            Sign up
+          </button>
+        </div>
       </div>
     );
   }
 }
 
-export default CSSModules(SignUp, styles, { allowMultiple: true });
+export default connect(null, { signup })(CSSModules(SignUp, styles, { allowMultiple: true }));

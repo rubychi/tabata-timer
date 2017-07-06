@@ -2,30 +2,13 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-
-const VENDOR_LIBS = [
-  'lodash',
-  'normalize.css',
-  'prop-types',
-  'react',
-  'react-bootstrap',
-  'react-dom',
-  'react-redux',
-  'react-router',
-  'redux',
-  'redux-form',
-  'redux-thunk',
-  'uuid',
-];
+require('babel-polyfill');
 
 module.exports = {
-  entry: {
-    bundle: './index.jsx',
-    vendor: VENDOR_LIBS,
-  },
+  entry: ['babel-polyfill', './index.jsx'],
   output: {
-    path: path.join(__dirname, 'build'),
-    filename: '[name].[chunkhash].js',
+    path: __dirname,
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -35,7 +18,7 @@ module.exports = {
           options: {
             presets: [
               ['es2015', { modules: false }],
-              'stage-2',
+              'stage-0',
               'react',
             ],
           },
@@ -49,14 +32,14 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: false,
+              sourceMap: true,
             },
           },
           'resolve-url-loader',
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: false,
+              sourceMap: true,
             },
           },
         ],
@@ -68,7 +51,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: false,
+              sourceMap: true,
               modules: true,
               importLoaders: '1',
               localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
@@ -78,13 +61,13 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: false,
+              sourceMap: true,
             },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: false,
+              sourceMap: true,
             },
           },
           {
@@ -107,24 +90,12 @@ module.exports = {
     ],
   },
   plugins: [
-    // Solve the issue of double importing, say like, react and redux libraries from bundle.js and vendor.js
-    // (the parameter "vendor" tells webpack to only include the common chunks inside the vendor.js)
-    // (the parameter "manifest" gives webpack a bit insight of the detail for preventing CommonsChunkPlugin running each time when bundle.js updates alone (while vendor.js itself stays the same))
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        drop_console: true,
-      },
-    }),
     new HtmlWebpackPlugin({
       template: './index-template.html',
     }),
     new webpack.LoaderOptionsPlugin({
       options: {
-        debug: false,
+        debug: true,
         postcss: [
           autoprefixer,
         ],
@@ -134,4 +105,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
   },
+  devServer: {
+    // host: '0.0.0.0',
+    inline: true,
+    port: 8080,
+  },
+  devtool: 'source-map',
 };

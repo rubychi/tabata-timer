@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Glyphicon, Button } from 'react-bootstrap';
+import { Modal, Glyphicon } from 'react-bootstrap';
 import CSSModules from 'react-css-modules';
 import SignIn from '../containers/SignIn';
 import SignUp from '../containers/SignUp';
@@ -10,13 +10,10 @@ class SignInDialog extends Component {
     super(props);
 
     this.state = {
-      signIn: false,
-      signUp: false,
       isSignInPage: true,
       showSignInDialog: false,
     };
     this.renderBody = this.renderBody.bind(this);
-    this.renderFooterBtn = this.renderFooterBtn.bind(this);
     this.closeSignInDialog = this.closeSignInDialog.bind(this);
   }
 
@@ -50,30 +47,6 @@ class SignInDialog extends Component {
     }
   }
 
-  renderFooterBtn() {
-    if (this.state.isSignInPage) {
-      return (
-        <Button
-          className="dialog-footer-btn"
-          bsStyle="primary"
-          onClick={() => this.setState({ signIn: true })}
-        >
-          Sign in
-        </Button>
-      );
-    } else {
-      return (
-        <Button
-          className="dialog-footer-btn"
-          bsStyle="success"
-          onClick={() => this.setState({ signUp: true })}
-        >
-          Sign up
-        </Button>
-      );
-    }
-  }
-
   render() {
     return (
       <div>
@@ -88,9 +61,6 @@ class SignInDialog extends Component {
           <Modal.Body>
             { this.renderBody() }
           </Modal.Body>
-          <Modal.Footer>
-            { this.renderFooterBtn() }
-          </Modal.Footer>
         </Modal>
       </div>
     );

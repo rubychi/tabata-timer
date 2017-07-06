@@ -26,7 +26,7 @@ class SignIn extends Component {
   render() {
     return (
       <div styleName="wrapper">
-        { /* TODO: can't resolve the correct path by simply put the image name, ex. google-icon-50x50 (file-loder isn't working?) */ }
+        { /* TODO: can't resolve the correct path by simply put the image name, ex. google-icon-50x50 (file-loader isn't working?) */ }
         <SocialMediaBtn imgSrc={googleImg} bgColor="#DC4E41" text="Sign in with Google" height="25px" />
         <SocialMediaBtn imgSrc={fbImg} bgColor="#475993" text="Sign in with Facebook" height="20px" />
         <div styleName="line-breaks-wrapper">
@@ -49,8 +49,26 @@ class SignIn extends Component {
           />
         </div>
         <span styleName="create-account-text">Don&apos;t have an account?
-          <a styleName="signInNSignUp-href" onClick={this.props.onClickSignUp} role="link"> Sign up</a>
+          <a
+            styleName="signInNSignUp-href"
+            onClick={this.props.onClickSignUp}
+            role="link"
+          >
+            {' '}Sign up
+          </a>
         </span>
+        <div
+          className="modal-footer"
+          styleName="signInNSignUp-footer"
+        >
+          <button
+            type="button"
+            className="dialog-footer-btn btn btn-primary"
+            styleName="signInNSignUp-btn"
+          >
+            Sign in
+          </button>
+        </div>
       </div>
     );
   }
