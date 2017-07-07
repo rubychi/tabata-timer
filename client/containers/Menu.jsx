@@ -79,13 +79,17 @@ class Menu extends Component {
         />
         { this.renderInputRange() }
         <div styleName="btns-wrapper">
+          { /*
           <Button
             styleName="savebtn-custom"
             bsStyle="primary"
             bsSize="large"
             onClick={() => {
-              if (this.props.user) {
+              if (this.props.signIn) {
                 this.setState({ activeSetting: '' });
+                this.props.savePresets(this.props.presets, (errorMessage) => {
+                  console.log('callback:', errorMessage);
+                });
               } else {
                 this.setState({ activeSetting: '', showAlertDialog: true, alertMessage: 'Please sign in first!' });
               }
@@ -94,6 +98,7 @@ class Menu extends Component {
           >
             <Glyphicon glyph="floppy-disk" />
           </Button>
+          */ }
           <Button
             styleName="deletebtn-custom"
             bsStyle="danger"

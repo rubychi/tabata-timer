@@ -2,12 +2,13 @@ require('./config');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-// const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const passportMiddleware = require('./middleware/passport');
-const authSignin = passport.authenticate('local', { session: false });
+const requireSignin = passport.authenticate('local', { session: false });
+const requireAuth = passport.authenticate('jwt', { session: false });
 const mongoose = require('./db/mongoose');
 const User = require('./models/user');
+const Presets = require('./models/presets');
 const genAuthToken = require('./utils/genAuthToken');
 
 const app = express();
@@ -21,7 +22,26 @@ if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
 }
 app.use(bodyParser.json());
 
-app.post('/signin', authSignin, (req, res) => {
+app.get('/presets', requireAuth, async (req, res) => {
+  try {
+    const presets = await Presets.find({ _creator: req.user._id });
+    return res.send({ presets: presets[0].presets });
+  } catch(e) {
+    res.status(400).send(e);
+  }
+});
+
+app.post('/presets', requireAuth, async(req, res) => {
+  try {
+    const preset = new Presets({ _creator: req.user._id, presets: req.body });
+    await preset.save();
+    return res.send();
+  } catch(e) {
+    return res.status(400).send(e);
+  }
+});
+
+app.post('/signin', requireSignin, (req, res) => {
   return res.send({ token: genAuthToken(req.user) });
 });
 
@@ -42,6 +62,15 @@ app.post('/signup', async (req, res) => {
       return res.send({ token: genAuthToken(user) });
     }
   } catch (e) {
+    return res.status(400).send(e);
+  }
+});
+
+app.patch('/presets', requireAuth, async (req, res) => {
+  try {
+    await Presets.update({ _creator: req.user._id }, { $set: { presets: req.body } });
+    return res.send();
+  } catch(e) {
     return res.status(400).send(e);
   }
 });

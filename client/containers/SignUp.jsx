@@ -77,15 +77,24 @@ class SignUp extends Component {
         <div styleName="line-breaks-wrapper">
           <hr /><span styleName="line-break-text">or</span><hr />
         </div>
-        { this.state.errorMessage ? <HelpBlock className="show" style={{ color: '#a94442' }}>{ this.state.errorMessage }</HelpBlock> : null }
+        { this.state.errorMessage ? <div className="alert alert-danger"><strong>Oops!</strong> { this.state.errorMessage }</div> : null }
         <div styleName="input" className={this.state.emailValidationState ? `form-group has-${this.state.emailValidationState}` : 'form-group'}>
           <FormControl
             inputRef={(ref) => { this.emailInput = ref; }}
+            style={{ marginTop: '10px' }}
             id="formControlsEmail"
             type="email"
             label="Email"
             placeholder="Email address"
             onBlur={this.validateEmail}
+            onChange={() => {
+              if (this.state.errorMessage || this.state.emailValidationState) {
+                this.setState({
+                  errorMessage: null,
+                  emailValidationState: null,
+                });
+              }
+            }}
           />
           { this.state.emailValidationState ? <HelpBlock className="show">The Email Address is in an invalid format</HelpBlock> : null }
         </div>
@@ -98,9 +107,13 @@ class SignUp extends Component {
             placeholder="Password"
             onBlur={this.validatePwd}
             onChange={() => {
-              if (this.pwdConfirmInput.value) {
+              if (this.state.errorMessage || this.state.pwdValidationState || this.pwdConfirmInput.value) {
                 this.pwdConfirmInput.value = '';
-                this.setState({ pwdConfirmValidationState: null });
+                this.setState({
+                  errorMessage: null,
+                  pwdValidationState: null,
+                  pwdConfirmValidationState: null,
+                });
               }
             }}
           />
@@ -114,6 +127,14 @@ class SignUp extends Component {
             type="password"
             placeholder="Confirm password"
             onBlur={this.validatePwdConfirm}
+            onChange={() => {
+              if (this.state.errorMessage || this.state.pwdConfirmValidationState) {
+                this.setState({
+                  errorMessage: null,
+                  pwdConfirmValidationState: null,
+                });
+              }
+            }}
           />
           { this.state.pwdConfirmValidationState ? <HelpBlock className="show">Passwords don't match</HelpBlock> : null }
         </div>
@@ -143,7 +164,7 @@ class SignUp extends Component {
               const passwordConfirm = this.pwdConfirmInput.value;
               if (email && password && passwordConfirm) {
                 if (!this.state.emailValidationState && !this.state.pwdValidationState && !this.state.pwdConfirmValidationState) {
-                  this.props.signUp({ email, password }, (errorMessage) => {
+                  this.props.signUp({ email, password, presets: this.props.presets }, (errorMessage) => {
                     if (errorMessage) {
                       this.setState({ errorMessage });
                     } else {
@@ -162,4 +183,8 @@ class SignUp extends Component {
   }
 }
 
-export default connect(null, { signUp })(CSSModules(SignUp, styles, { allowMultiple: true }));
+function mapStateToProps({ presets }) {
+  return { presets };
+}
+
+export default connect(mapStateToProps, { signUp })(CSSModules(SignUp, styles, { allowMultiple: true }));

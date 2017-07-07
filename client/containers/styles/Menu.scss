@@ -46,10 +46,12 @@
     margin-top: 1em;
   }
 }
+
 .savebtn-custom {
   flex: 0.48;
 }
 
 .deletebtn-custom {
-  flex: 0.48;
+  // flex: 0.48; (if two buttons are placed)
+  flex: 1;
 }

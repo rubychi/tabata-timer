@@ -33,14 +33,20 @@ class SignIn extends Component {
         <div styleName="line-breaks-wrapper">
           <hr /><span styleName="line-break-text">or</span><hr />
         </div>
-        { this.state.errorMessage ? <HelpBlock className="show hint-erro" style={{ color: '#a94442' }}>Incorrect email or password</HelpBlock> : null }
+        { this.state.errorMessage ? <div className="alert alert-danger"><strong>Oops!</strong> Incorrect email or password</div> : null }
         <div styleName="input" className={this.state.validationState ? `form-group has-${this.state.validationState}` : 'form-group'}>
           <FormControl
             inputRef={(ref) => { this.emailInput = ref; }}
+            style={{ marginTop: '10px' }}
             id="formControlsEmail"
             type="email"
             label="Email"
             placeholder="Email address"
+            onChange={() => {
+              if (this.state.errorMessage) {
+                this.setState({ errorMessage: null });
+              }
+            }}
           />
           <FormControl
             inputRef={(ref) => { this.pwdInput = ref; }}
@@ -49,6 +55,11 @@ class SignIn extends Component {
             label="Password"
             type="password"
             placeholder="Password"
+            onChange={() => {
+              if (this.state.errorMessage) {
+                this.setState({ errorMessage: null });
+              }
+            }}
           />
         </div>
         <span styleName="create-account-text">Don&apos;t have an account?

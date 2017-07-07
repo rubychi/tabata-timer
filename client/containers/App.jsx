@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import CSSModules from 'react-css-modules';
 import { Button, Glyphicon } from 'react-bootstrap';
 import MobileDetect from 'mobile-detect';
+import _ from 'lodash';
 import Menu from './Menu';
 import Timers from './Timers';
 import SignInNSignUpDialog from '../components/SignInNSignUpDialog';
 import Subject from '../components/Subject';
 import signOut from '../actions/signOut';
+import savePresets from '../actions/savePresets';
 import styles from './styles/App';
 
 class App extends Component {
@@ -34,10 +36,29 @@ class App extends Component {
   }
   componentWillMount() {}
   componentDidMount() {}
-  componentWillReceiveProps() {}
+
+  componentWillReceiveProps(nextProps) {
+    // Update presets to database when changed
+    // if the menu is opened then exclude comparing data fields to avoid accessing database frequently
+    if (nextProps.signIn) {
+      if (nextProps.openMenu) {
+        const currPresets = nextProps.presets.map(preset => _.omit(preset, ['data']));
+        const nextPresets = this.props.presets.map(preset => _.omit(preset, ['data']));
+        if (!_.isEqual(currPresets, nextPresets)) {
+          this.props.savePresets(nextProps.presets);
+        }
+      } else {
+        if (!_.isEqual(this.props.presets, nextProps.presets)) {
+          this.props.savePresets(nextProps.presets);
+        }
+      }
+    }
+  }
+
   shouldComponentUpdate() {
     return true;
   }
+
   componentWillUpdate() {}
   componentDidUpdate() {}
   componentWillUnmount() {}
@@ -54,8 +75,8 @@ class App extends Component {
           styleName="signInNSignOut-href"
           role="link"
           onClick={() => {
-            this.props.signOut();
             this.setState({ signIn: false, play: false });
+            this.props.signOut();
           }}
         >
           <Glyphicon glyph="user" /> Sign Out
@@ -80,12 +101,16 @@ class App extends Component {
         <Button
           styleName="btn-menu"
           bsSize="large"
-          onClick={() =>
+          onClick={() => {
             this.setState({
               openMenu: false,
               changeSetting: false,
-            })
-          }
+            });
+            // Update data fields to database
+            if (this.state.signIn) {
+              this.props.savePresets(this.props.presets);
+            }
+          }}
           active
         >
           <Glyphicon glyph="menu-hamburger" />
@@ -128,7 +153,7 @@ class App extends Component {
     if (this.state.openMenu) {
       return (
         <Menu
-          user={this.state.user}
+          signIn={this.state.signIn}
           openMenu={this.state.openMenu}
           onChangePreset={() => {
             this.setState({ changePreset: true, play: false, activeSubject: 'Welcome' });
@@ -233,4 +258,8 @@ App.contextTypes = {
   store: React.PropTypes.object,
 };
 
-export default connect(null, { signOut })(CSSModules(App, styles));
+function mapStateToProps({ presets }) {
+  return { presets };
+}
+
+export default connect(mapStateToProps, { signOut, savePresets })(CSSModules(App, styles));

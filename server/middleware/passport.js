@@ -17,8 +17,28 @@ const localSignin = new LocalStrategy({ usernameField: 'email' }, async (email, 
     }
     return done(null, user);
   } catch(e) {
-    return done(e);
+    console.log(e);
+    return done();
+  }
+});
+
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromHeader('x-auth'),
+  secretOrKey: JWT_SECRET,
+}
+
+const jwtSignin = new JwtStrategy(jwtOptions, async (payload, done) => {
+  try {
+    const user = await User.findById(payload.id);
+    if (user) {
+      return done(null, user);
+    } else {
+      return done(null, false);
+    }
+  } catch(e) {
+    return done(e, false);
   }
 });
 
 passport.use(localSignin);
+passport.use(jwtSignin);

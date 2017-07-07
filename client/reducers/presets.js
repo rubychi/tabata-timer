@@ -1,8 +1,10 @@
 import {
   SET_SETTING,
   SET_TITLES,
+  SET_PRESET,
   ADD_PRESET,
   DELETE_PRESET,
+  RESET_PRESET,
  } from '../actions';
 import _ from 'lodash';
 import uuidV4 from 'uuid/v4';
@@ -33,19 +35,6 @@ const DATA = [
         value: 3,
       },
     ],
-    // userDefinedTitles: [
-    //   '準備',
-    //   '撐體',
-    //   '側邊撐體轉身－左',
-    //   '側邊撐體轉身－右',
-    //   '側邊撐體－左',
-    //   '側邊撐體－右',
-    //   '撐體升降',
-    //   '撐體伏地上下',
-    //   '伏地轉身手碰腳',
-    //   '伏地膝碰胸碰肘',
-    //   '撐體',
-    // ],
   },
 ];
 
@@ -68,11 +57,15 @@ export default function (state = DATA, action) {
       return setSetting(_.cloneDeep(state), action.payload);
     case SET_TITLES:
       return setTitles(_.cloneDeep(state), action.payload);
+    case SET_PRESET:
+      return action.payload;
     case ADD_PRESET:
       // Use the default settings as the new preset settings
       return [...state, _.assign({ data: _.cloneDeep(state[0].data) }, { id: uuidV4(), name: action.payload })];
     case DELETE_PRESET:
       return _.filter(state, preset => preset.id !== action.payload);
+    case RESET_PRESET:
+      return DATA;
     default:
       return state;
   }
