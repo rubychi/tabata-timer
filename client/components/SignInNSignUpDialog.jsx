@@ -33,6 +33,7 @@ class SignInNSignUpDialog extends Component {
       return (
         <SignIn
           signIn={this.state.signIn}
+          history={this.props.history}
           onSignIn={() => {
             this.setState({ showSignInNSignUpDialog: false });
             this.props.onSignInOrSignUp();
@@ -45,6 +46,7 @@ class SignInNSignUpDialog extends Component {
       return (
         <SignUp
           signUp={this.state.signUp}
+          history={this.props.history}
           onSignUp={() => {
             this.setState({
               isSignInPage: true,

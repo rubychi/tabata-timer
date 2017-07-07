@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const findOrCreate = require('mongoose-findorcreate');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
@@ -6,7 +7,6 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     trim: true,
-    required: true,
     unique: true,
     validate: {
       validator: validator.isEmail,
@@ -16,8 +16,8 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     minlength: 8,
-    required: true,
   },
+  googleId: String,
 });
 
 UserSchema.pre('save', async function (next) {
@@ -43,6 +43,8 @@ UserSchema.methods.cmpPassword = async function (password) {
     return ({ error: e });
   }
 }
+
+UserSchema.plugin(findOrCreate);
 
 let User = mongoose.model('User', UserSchema);
 

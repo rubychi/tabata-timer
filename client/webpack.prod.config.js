@@ -5,15 +5,19 @@ const autoprefixer = require('autoprefixer');
 require('babel-polyfill');
 
 const VENDOR_LIBS = [
+  'axios',
+  'create-react-class',
   'lodash',
   'mobile-detect',
   'normalize.css',
   'prop-types',
   'react',
   'react-bootstrap',
+  'react-css-modules',
   'react-dom',
   'react-input-range',
   'react-redux',
+  'react-router-dom',
   'react-sound',
   'react-tappable',
   'redux',

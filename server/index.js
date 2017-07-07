@@ -6,6 +6,7 @@ const passport = require('passport');
 const passportMiddleware = require('./middleware/passport');
 const requireSignin = passport.authenticate('local', { session: false });
 const requireAuth = passport.authenticate('jwt', { session: false });
+const requireGoogleAuth = passport.authenticate('google', { scope: ['profile'], session: false });
 const mongoose = require('./db/mongoose');
 const User = require('./models/user');
 const Presets = require('./models/presets');
@@ -21,6 +22,9 @@ if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
   app.use(express.static('build'));
 }
 app.use(bodyParser.json());
+// Initialize Passport and restore authentication state, if any, from the session.
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.get('/presets', requireAuth, async (req, res) => {
   try {
@@ -29,6 +33,14 @@ app.get('/presets', requireAuth, async (req, res) => {
   } catch(e) {
     res.status(400).send(e);
   }
+});
+
+app.get('/auth/google', requireGoogleAuth);
+
+app.get('/auth/google/return', requireGoogleAuth, (req, res, next) => {
+  // Successful authentication, redirect home.
+  res.cookie('token', genAuthToken(req.user));
+  res.redirect('/');
 });
 
 app.post('/presets', requireAuth, async(req, res) => {

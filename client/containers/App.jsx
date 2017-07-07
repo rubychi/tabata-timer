@@ -240,6 +240,7 @@ class App extends Component {
             <SignInNSignUpDialog
               title={this.state.title}
               show={this.state.showSignInDialog}
+              history={this.props.history}
               onClose={() => this.setState({ showSignInDialog: false })}
               onSignInOrSignUp={() => this.setState({ signIn: true, showSignInDialog: false })}
             />
