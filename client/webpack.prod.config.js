@@ -115,6 +115,11 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
     // Solve the issue of double importing, say like, react and redux libraries from bundle.js and vendor.js
     // (the parameter "vendor" tells webpack to only include the common chunks inside the vendor.js)
     // (the parameter "manifest" gives webpack a bit insight of the detail for preventing CommonsChunkPlugin running each time when bundle.js updates alone (while vendor.js itself stays the same))

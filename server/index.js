@@ -22,9 +22,6 @@ if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
   app.use(express.static('build'));
 }
 app.use(bodyParser.json());
-// Initialize Passport and restore authentication state, if any, from the session.
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 app.get('/presets', requireAuth, async (req, res) => {
   try {

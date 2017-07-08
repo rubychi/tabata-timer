@@ -1,9 +1,23 @@
-export const ROOT_URL = 'http://localhost:3000';
+let ROOT_URL = 'https://tabata-timer.herokuapp.com';
+if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
+  ROOT_URL = 'http://localhost:3000';
+}
 
-export const SET_SETTING = 'SET_SETTING';
-export const SET_TITLES = 'SET_TITLES';
-export const SET_PRESET = 'SET_PRESET';
-export const ADD_PRESET = 'ADD_PRESET';
-export const DELETE_PRESET = 'DELETE_PRESET';
-export const RESET_PRESET = 'RESET_PRESET';
-export const CHANGE_ACTIVE_PRESET = 'CHANGE_ACTIVE_PRESET';
+const SET_SETTING = 'SET_SETTING';
+const SET_TITLES = 'SET_TITLES';
+const SET_PRESET = 'SET_PRESET';
+const ADD_PRESET = 'ADD_PRESET';
+const DELETE_PRESET = 'DELETE_PRESET';
+const RESET_PRESET = 'RESET_PRESET';
+const CHANGE_ACTIVE_PRESET = 'CHANGE_ACTIVE_PRESET';
+
+module.exports = {
+  ROOT_URL,
+  SET_SETTING,
+  SET_TITLES,
+  SET_PRESET,
+  ADD_PRESET,
+  DELETE_PRESET,
+  RESET_PRESET,
+  CHANGE_ACTIVE_PRESET,
+};
