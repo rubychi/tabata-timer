@@ -13,6 +13,7 @@ const VENDOR_LIBS = [
   'prop-types',
   'react',
   'react-bootstrap',
+  'react-cookie',
   'react-css-modules',
   'react-dom',
   'react-input-range',
