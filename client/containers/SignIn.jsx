@@ -6,6 +6,7 @@ import CSSModules from 'react-css-modules';
 import { googleImg, fbImg } from '../global';
 // import { setSetting } from '../actions/setSetting';
 import SocialMediaBtn from '../components/SocialMediaBtn';
+import { ROOT_URL } from '../actions';
 import signIn from '../actions/signIn';
 import styles from './styles/SignInNSignUp';
 
@@ -16,6 +17,7 @@ class SignIn extends Component {
     this.state = {
       errorMessage: null,
     };
+    this.popup = this.popup.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,12 +26,20 @@ class SignIn extends Component {
     }
   }
 
+  popup(path) {
+    if (this.props.isPhone) {
+      window.open(`${ROOT_URL}${path}`, '_blank', `width=${this.props.screenW}, height=${this.props.screenH}`);
+    } else {
+      window.open(`${ROOT_URL}${path}`, '_blank', `width=${this.props.screenW / 2}, height=${this.props.screenH}, left=${this.props.screenW / 4}`);
+    }
+  }
+
   render() {
     return (
       <div styleName="wrapper">
         { /* TODO: can't resolve the correct path by simply put the image name, ex. google-icon-50x50 (file-loader isn't working?) */ }
-        <SocialMediaBtn imgSrc={googleImg} bgColor="#DC4E41" text="Sign in with Google" height="25px" onClick={() => this.props.history.push('/auth/google') } />
-        <SocialMediaBtn imgSrc={fbImg} bgColor="#475993" text="Sign in with Facebook" height="20px" onClick={() => this.props.history.push('/auth/facebook') } />
+        <SocialMediaBtn imgSrc={googleImg} bgColor="#DC4E41" text="Sign in with Google" height="25px" onClick={() => this.popup('/auth/google')} />
+        <SocialMediaBtn imgSrc={fbImg} bgColor="#475993" text="Sign in with Facebook" height="20px" onClick={() => this.popup('/auth/facebook')} />
         <div styleName="line-breaks-wrapper">
           <hr /><span styleName="line-break-text">or</span><hr />
         </div>

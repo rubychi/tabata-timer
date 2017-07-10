@@ -10,17 +10,26 @@ class SignInNSignUpDialog extends Component {
     super(props);
 
     this.state = {
+      screenW: 0,
+      screenH: 0,
       isSignInPage: true,
-      showSignInNSignUpDialog: false,
     };
     this.renderBody = this.renderBody.bind(this);
     this.closeSignInDialog = this.closeSignInDialog.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.show !== this.state.showSignInNSignUpDialog) {
-      this.setState({ showSignInNSignUpDialog: nextProps.show });
-    }
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ screenW: window.innerWidth, screenH: window.innerHeight });
   }
 
   closeSignInDialog() {
@@ -32,26 +41,25 @@ class SignInNSignUpDialog extends Component {
     if (this.state.isSignInPage) {
       return (
         <SignIn
+          isPhone={this.props.isPhone}
+          screenW={this.state.screenW}
+          screenH={this.state.screenH}
           signIn={this.state.signIn}
           history={this.props.history}
-          onSignIn={() => {
-            this.setState({ showSignInNSignUpDialog: false });
-            this.props.onSignInOrSignUp();
-          }}
-          showSignInNSignUpDialog={this.state.showSignInNSignUpDialog}
+          onSignIn={this.props.onSignInOrSignUp}
           onClickSignUpHref={() => this.setState({ isSignInPage: false })}
         />
       );
     } else {
       return (
         <SignUp
+          isPhone={this.props.isPhone}
+          screenW={this.state.screenW}
+          screenH={this.state.screenH}
           signUp={this.state.signUp}
           history={this.props.history}
           onSignUp={() => {
-            this.setState({
-              isSignInPage: true,
-              showSignInNSignUpDialog: false
-            });
+            this.setState({ isSignInPage: true });
             this.props.onSignInOrSignUp();
           }}
           onClickSignInHref={() => this.setState({ isSignInPage: true })}
@@ -65,7 +73,7 @@ class SignInNSignUpDialog extends Component {
       <div>
         <Modal
           styleName="modal-custom"
-          show={this.state.showSignInNSignUpDialog}
+          show={this.props.show}
           onHide={this.closeSignInDialog}
         >
           <Modal.Header closeButton>

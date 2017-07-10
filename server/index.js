@@ -3,10 +3,12 @@ require('./config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const path = require('path');
 const passportMiddleware = require('./middleware/passport');
 const requireSignin = passport.authenticate('local', { session: false });
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireGoogleAuth = passport.authenticate('google', { scope: ['profile'], session: false });
+const requireFacebookAuth = passport.authenticate('facebook', { session: false });
 const mongoose = require('./db/mongoose');
 const User = require('./models/user');
 const Presets = require('./models/presets');
@@ -35,15 +37,20 @@ app.get('/presets', requireAuth, async (req, res) => {
 app.get('/auth/google', requireGoogleAuth);
 
 app.get('/auth/google/return', requireGoogleAuth, (req, res, next) => {
-  // Successful authentication, redirect home.
   res.cookie('token', genAuthToken(req.user));
-  res.redirect('/');
+  res.sendFile(path.join(__dirname, '/authPopup.html'));
+});
+
+app.get('/auth/facebook', requireFacebookAuth);
+
+app.get('/auth/facebook/return', requireFacebookAuth, (req, res, next) => {
+  res.cookie('token', genAuthToken(req.user));
+  res.sendFile(path.join(__dirname, '/authPopup.html'));
 });
 
 app.post('/presets', requireAuth, async(req, res) => {
   try {
-    const preset = new Presets({ _creator: req.user._id, presets: req.body });
-    await preset.save();
+    await Presets.findOrCreate({ _creator: req.user._id }, { presets: req.body });
     return res.send();
   } catch(e) {
     return res.status(400).send(e);

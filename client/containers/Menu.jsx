@@ -65,56 +65,58 @@ class Menu extends Component {
     return (
       <div styleName="menu-wrapper">
         <Preset onChangePreset={this.props.onChangePreset} />
-        <SettingSection
-          preset={this.props.activePreset.name}
-          activeSetting={this.state.activeSetting}
-          onClickSetting={title => {
-            if (!title.length) {
-              this.props.onChangeSettings(false);
-            } else {
-              this.props.onChangeSettings(true);
-            }
-            this.setState({ activeSetting: title });
-          }}
-        />
-        { this.renderInputRange() }
-        <div styleName="btns-wrapper">
-          { /*
-          <Button
-            styleName="savebtn-custom"
-            bsStyle="primary"
-            bsSize="large"
-            onClick={() => {
-              if (this.props.signIn) {
-                this.setState({ activeSetting: '' });
-                this.props.savePresets(this.props.presets, (errorMessage) => {
-                  console.log('callback:', errorMessage);
-                });
+        <div styleName="settings-wrapper">
+          <SettingSection
+            preset={this.props.activePreset.name}
+            activeSetting={this.state.activeSetting}
+            onClickSetting={title => {
+              if (!title.length) {
+                this.props.onChangeSettings(false);
               } else {
-                this.setState({ activeSetting: '', showAlertDialog: true, alertMessage: 'Please sign in first!' });
+                this.props.onChangeSettings(true);
               }
-              this.props.onChangeSettings(false);
+              this.setState({ activeSetting: title });
             }}
-          >
-            <Glyphicon glyph="floppy-disk" />
-          </Button>
-          */ }
-          <Button
-            styleName="deletebtn-custom"
-            bsStyle="danger"
-            bsSize="large"
-            onClick={() => {
-              const presetName = this.props.activePreset.name;
-              if (this.props.activePreset.name === 'Default') {
-                this.setState({ activeSetting: '', showAlertDialog: true, alertMessage: 'Cannot delete default preset!' });
-              } else {
-                this.setState({ activeSetting: '', showAlertDialog: true, alertMessage: `Are you sure you want to delete preset "${presetName}"?`, isDeletePreset: true });
-              }
-              this.props.onChangeSettings(false);
-            }}
-          >
-            <Glyphicon glyph="trash" />
-          </Button>
+          />
+          { this.renderInputRange() }
+          <div styleName="btns-wrapper">
+            { /*
+            <Button
+              styleName="savebtn-custom"
+              bsStyle="primary"
+              bsSize="large"
+              onClick={() => {
+                if (this.props.signIn) {
+                  this.setState({ activeSetting: '' });
+                  this.props.savePresets(this.props.presets, (errorMessage) => {
+                    console.log('callback:', errorMessage);
+                  });
+                } else {
+                  this.setState({ activeSetting: '', showAlertDialog: true, alertMessage: 'Please sign in first!' });
+                }
+                this.props.onChangeSettings(false);
+              }}
+            >
+              <Glyphicon glyph="floppy-disk" />
+            </Button>
+            */ }
+            <Button
+              styleName="deletebtn-custom"
+              bsStyle="danger"
+              bsSize="large"
+              onClick={() => {
+                const presetName = this.props.activePreset.name;
+                if (this.props.activePreset.name === 'Default') {
+                  this.setState({ activeSetting: '', showAlertDialog: true, alertMessage: 'Cannot delete default preset!' });
+                } else {
+                  this.setState({ activeSetting: '', showAlertDialog: true, alertMessage: `Are you sure you want to delete preset "${presetName}"?`, isDeletePreset: true });
+                }
+                this.props.onChangeSettings(false);
+              }}
+            >
+              <Glyphicon glyph="trash" />
+            </Button>
+          </div>
         </div>
         <AlertDialog
           show={this.state.showAlertDialog}

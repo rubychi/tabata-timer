@@ -6,6 +6,7 @@ import uuidV4 from 'uuid/v4';
 import Sound from 'react-sound';
 import { Modal, Glyphicon, FormControl, Button } from 'react-bootstrap';
 import { getActivePreset } from '../selectors/presetsSelectors';
+import savePresets from '../actions/savePresets';
 import setTitles from '../actions/setTitles';
 import Timer from '../components/Timer';
 import styles from './styles/Timers';
@@ -36,7 +37,13 @@ class Timers extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.openMenu || nextProps.reset || nextProps.changePreset || nextProps.changeSetting) {
+    // Initialize state when sign in/out
+    if ((this.props.isSignIn !== nextProps.isSignIn) ||
+      nextProps.openMenu ||
+      nextProps.reset ||
+      nextProps.changePreset ||
+      nextProps.changeSetting
+    ) {
       this.initState(nextProps.activePreset);
       /* A workaround for solving audio issue on mobile devices */
       this.setState({ kickStart: false });
@@ -75,6 +82,7 @@ class Timers extends Component {
         id: this.props.activePreset.id,
         titles: _.sortBy(newCycles, 'origIdx').map((item) => { return(item.title); })
       });
+      this.props.savePresets(this.props.presets);
       this.setState({
         cycles: newCycles,
         titleValidationState: null,
@@ -282,8 +290,9 @@ class Timers extends Component {
 
 function mapStateToProps(state) {
   return {
+    presets: state.presets,
     activePreset: getActivePreset(state),
   };
 }
 
-export default connect(mapStateToProps, { setTitles })(CSSModules(Timers, styles));
+export default connect(mapStateToProps, { savePresets, setTitles })(CSSModules(Timers, styles));

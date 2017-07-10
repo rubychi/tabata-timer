@@ -27,6 +27,7 @@
     "mongoose": "^4.5.9",
     "mongoose-findorcreate": "^2.0.0",
     "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",

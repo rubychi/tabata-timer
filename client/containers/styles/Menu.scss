@@ -22,6 +22,19 @@
   }
 }
 
+// TODO: In order to scroll to the bottom of div, adjusting height according to different screen size (not a general solution)
+.settings-wrapper {
+  width: 100%;
+  height: 80%;
+  overflow-y: scroll;
+  @include atSmall {
+    height: 73%;
+  }
+  @include atMediumSmall {
+    height: 70%;
+  }
+}
+
 .input-range-wrapper {
   display: none;
   width: 100%;

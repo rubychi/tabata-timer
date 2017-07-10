@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema({
     minlength: 8,
   },
   googleId: String,
+  facebookId: String,
 });
 
 UserSchema.pre('save', async function (next) {

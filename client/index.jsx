@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { CookiesProvider } from 'react-cookie';
 import {
   BrowserRouter as Router,
   Route,
@@ -11,11 +12,13 @@ import 'normalize.css';
 
 ReactDOM.render(
   <Provider store={configureStore()}>
-    <Router>
-      <div className="app-wrapper">
-        <Route exact path="/" component={App} />
-      </div>
-    </Router>
+    <CookiesProvider>
+      <Router>
+        <div className="app-wrapper">
+          <Route exact path="/" component={App} />
+        </div>
+      </Router>
+    </CookiesProvider>
   </Provider>,
   document.getElementById('root')
 );

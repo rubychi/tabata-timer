@@ -5,7 +5,8 @@
   "scripts": {
     "start": "SET \"NODE_ENV=development\" && webpack-dev-server --inline",
     "prebuild": "rm -rf ./build",
-    "build": "webpack -p --config webpack.prod.config"
+    "build": "SET \"NODE_ENV=production\" && webpack -p --config webpack.prod.config",
+    "postbuild": "rm -rf ../server/build && mv ./build ../server"
   },
   "author": "",
   "license": "ISC",
@@ -43,6 +44,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.3.2",
     "react-bootstrap": "^0.31.0",
+    "react-cookie": "^2.0.8",
     "react-css-modules": "^4.0.5",
     "react-dom": "^15.3.2",
     "react-input-range": "^1.1.3",

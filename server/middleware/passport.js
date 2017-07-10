@@ -3,11 +3,15 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/user');
 const JWT_SECRET = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL;
+const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID;
+const FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET;
+const FACEBOOK_CALLBACK_URL = process.env.FACEBOOK_CALLBACK_URL;
 
 const localSignin = new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
   try {
@@ -27,7 +31,7 @@ const localSignin = new LocalStrategy({ usernameField: 'email' }, async (email, 
 });
 
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromHeader('x-auth'),
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: JWT_SECRET,
 }
 
@@ -52,8 +56,23 @@ const googleOptions = {
 
 const googleSignin = new GoogleStrategy(googleOptions, async (accessToken, refreshToken, profile, cb) => {
   try {
-    const user = await User.findOrCreate({ googleId: profile.id });
-    return cb(null, user);
+    const result = await User.findOrCreate({ googleId: profile.id });
+    return cb(null, result.doc);
+  } catch(e) {
+    return cb(e, null)
+  }
+});
+
+const facebookOptions = {
+  clientID: FACEBOOK_CLIENT_ID,
+  clientSecret: FACEBOOK_CLIENT_SECRET,
+  callbackURL: FACEBOOK_CALLBACK_URL,
+};
+
+const facebookSignin = new FacebookStrategy(facebookOptions, async (accessToken, refreshToken, profile, cb) => {
+  try {
+    const result = await User.findOrCreate({ facebookId: profile.id });
+    return cb(null, result.doc);
   } catch(e) {
     return cb(e, null)
   }
@@ -62,3 +81,4 @@ const googleSignin = new GoogleStrategy(googleOptions, async (accessToken, refre
 passport.use(localSignin);
 passport.use(jwtSignin);
 passport.use(googleSignin);
+passport.use(facebookSignin);
