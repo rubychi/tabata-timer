@@ -54,6 +54,16 @@
     position: relative;
   }
 
+  .dropdown-menu {
+    margin-top: -0.5em;
+    @include atSmall {
+      margin-top: -1em;
+    }
+    @include atMedium {
+      margin-top: -0.5em;
+    }
+  }
+
   .dropdown.open .dropdown-menu {
     display: table;
     width: 100%;
