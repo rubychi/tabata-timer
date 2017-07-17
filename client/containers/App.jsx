@@ -256,17 +256,18 @@ class App extends Component {
       <div styleName="app-wrapper">
         <header>
           <div styleName="title-wrapper">
-            <span
-              styleName="title"
-              role="link"
-              onClick={() => {
-                if (this.state.openMenu) {
-                  this.setState({ openMenu: false, changeSetting: false })
-                }
-              }}
-            >
-              { this.state.title }
-            </span>
+            <div styleName="title">
+              <span
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  if (this.state.openMenu) {
+                    this.setState({ openMenu: false, changeSetting: false })
+                  }
+                }}
+              >
+                { this.state.title }
+              </span>
+            </div>
             { this.renderSignInNSignOutHref() }
             <SignInNSignUpDialog
               title={this.state.title}

@@ -18,6 +18,7 @@ class Timers extends Component {
     this.state = {
       timerId: null,
       kickStart: false,
+      startRound: false,
       playSound: false,
       showModifyTitleDialog: false,
       titleValidationState: null,
@@ -105,8 +106,9 @@ class Timers extends Component {
           if (!curCycle.prepareActive) {
             curCycle.prepareActive = true;
             newState.curTabata += 1;
+            this.props.onChangeSubject(`T${newState.curTabata}: ${newState.cycles[0].title}`);
             if (newState.curTabata <= this.state.tabatas) {
-              // The previous round has been finished
+              // The previous round has finished
               if (!curCycle.prepare) {
                 curCycle.prepare = 100;
                 const restCycles = newState.cycles.slice(1).map((item) => {
@@ -114,47 +116,47 @@ class Timers extends Component {
                   item.rest = 100;
                   return item;
                 });
+                newState.startRound = true;
                 newState.cycles = [curCycle, ...restCycles];
               }
-              this.props.onChangeSubject(`T${newState.curTabata}: ${newState.cycles[0].title}`);
             }
           } else {
             if (curCycle.prepare) {
               curCycle.prepare -= (100 / this.state.prepare);
-              if (curCycle.prepare < 0) {
+              newState.startRound = false;
+              if (curCycle.prepare <= 0) {
                 curCycle.prepare = 0;
-              }
-            } else {
-              curCycle.prepareActive = false;
-              if (newState.curTabata <= this.state.tabatas) {
-                finCycleFlag = true;
+                newState.playSound = true;
+                curCycle.prepareActive = false;
+                if (newState.curTabata <= this.state.tabatas) {
+                  finCycleFlag = true;
+                }
               }
             }
           }
         } else {
           if (!curCycle.workActive && !curCycle.restActive) {
             curCycle.workActive = true;
-            this.props.onChangeSubject(`T${newState.curTabata}: ${newState.cycles[0].title}`);
-          } else if (curCycle.workActive) {
+          }
+          if (curCycle.workActive) {
             if (curCycle.work) {
               curCycle.work -= (100 / this.state.work);
-              if (curCycle.work < 0) {
+              if (curCycle.work <= 0) {
                 curCycle.work = 0;
+                newState.playSound = true;
+                curCycle.workActive = false;
+                curCycle.restActive = true;
               }
-            } else {
-              curCycle.workActive = false;
-              curCycle.restActive = true;
-              newState.playSound = true;
             }
           } else if (curCycle.restActive) {
             if (curCycle.rest) {
               curCycle.rest -= (100 / this.state.rest);
-              if (curCycle.rest < 0) {
+              if (curCycle.rest <= 0) {
                 curCycle.rest = 0;
+                newState.playSound = true;
+                curCycle.restActive = false;
+                finCycleFlag = true;
               }
-            } else {
-              curCycle.restActive = false;
-              finCycleFlag = true;
             }
           }
         }
@@ -162,11 +164,10 @@ class Timers extends Component {
         if (finCycleFlag) {
           let shifted = newState.cycles.shift();
           newState.cycles.push(shifted);
-          newState.playSound = true;
+          this.props.onChangeSubject(`T${newState.curTabata}: ${newState.cycles[0].title}`);
         }
         this.setState(newState);
       } else {
-        this.initState(this.props.activePreset);
         this.props.onChangeSubject('Finished');
       }
     }
@@ -189,6 +190,7 @@ class Timers extends Component {
         id: uuidV4(),
         origIdx: 0,
         title: state.userDefinedTitles ? state.userDefinedTitles[0] || 'Prepare' : 'Prepare',
+        origPrepare: presetSettings.prepare,
         prepare: 100,
         prepareActive: false,
       }, ..._.times(presetSettings.cycles, function(n) {
@@ -196,8 +198,10 @@ class Timers extends Component {
           id: uuidV4(),
           origIdx: n + 1,
           title: state.userDefinedTitles ? state.userDefinedTitles[n + 1] || `Cycle ${n + 1}` : `Cycle ${n + 1}`,
+          origWork: presetSettings.work,
           work: 100,
           workActive: false,
+          origRest: presetSettings.rest,
           rest: 100,
           restActive: false,
         };
@@ -208,18 +212,20 @@ class Timers extends Component {
   renderTimers() {
     let timers = [];
     timers.push(this.state.cycles.map((timer) => {
-      const { id, title, prepare, prepareActive, work, workActive, rest, restActive } = timer;
+      const { id, title, origPrepare, prepare, prepareActive, origWork, work, workActive, origRest, rest, restActive } = timer;
       if (prepare !== undefined) {
         return (
           <Timer
             key={id}
             id={id}
             title={title}
+            timer1={origPrepare}
             progress1={prepare}
             p1Style="success"
             p1Active={prepareActive}
             progress2={null}
             onModifyName={this.modifyName}
+            startRound={this.state.startRound}
           />
         );
       } else {
@@ -228,6 +234,8 @@ class Timers extends Component {
             key={id}
             id={id}
             title={title}
+            timer1={origWork}
+            timer2={origRest}
             progress1={work}
             p1Style="danger"
             p1Active={workActive}
@@ -235,6 +243,7 @@ class Timers extends Component {
             p2Style="warning"
             p2Active={restActive}
             onModifyName={this.modifyName}
+            startRound={this.state.startRound}
           />
         );
       }
