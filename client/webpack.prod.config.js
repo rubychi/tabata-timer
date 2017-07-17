@@ -10,6 +10,7 @@ const VENDOR_LIBS = [
   'lodash',
   'mobile-detect',
   'normalize.css',
+  'moment',
   'prop-types',
   'react',
   'react-bootstrap',
