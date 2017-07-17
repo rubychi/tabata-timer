@@ -93,7 +93,7 @@ class Timer extends Component {
         styleName="panel-custom"
         header={title}
         eventKey="1"
-        onClick={() => props.onModifyName(props.id, title)}
+        onClick={() => this.props.onModifyName(this.props.id, title)}
       >
         {progressBars}
       </Panel>
