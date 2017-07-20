@@ -118,6 +118,7 @@ class Timers extends Component {
                 newState.startRound = true;
                 newState.cycles = [curCycle, ...restCycles];
               }
+              this.props.onChangeSubject(`T${newState.curTabata}: ${newState.cycles[0].title}`);
             }
           } else {
             if (curCycle.prepare) {
@@ -163,11 +164,8 @@ class Timers extends Component {
         if (finCycleFlag) {
           let shifted = newState.cycles.shift();
           newState.cycles.push(shifted);
-          // If it's next round then add tabata round number by one
-          if ((newState.cycles[0].prepareActive !== undefined) &&
-             ((newState.curTabata + 1) <= this.state.tabatas)) {
-            this.props.onChangeSubject(`T${newState.curTabata + 1}: ${newState.cycles[0].title}`);
-          } else {
+          // If it's not the next round then change subject title
+          if (newState.cycles[0].prepareActive === undefined) {
             this.props.onChangeSubject(`T${newState.curTabata}: ${newState.cycles[0].title}`);
           }
         }
