@@ -105,10 +105,10 @@ Follow the instructions below to set up the environment and run this project on 
 
 ### Frontend:
 
-* Bootstrap
 * react
 * redux
 * axios
+* bootstrap
 
 ### Backend:
 
