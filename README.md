@@ -88,6 +88,7 @@ Follow the instructions below to set up the environment and run this project on 
 > git push heroku master
 > heroku addons:create mongolab:sandbox
 ```
+
 3. Set up config vars
 ```
 > heroku config:set
@@ -99,6 +100,11 @@ Follow the instructions below to set up the environment and run this project on 
   FACEBOOK_CLIENT_ID=[Your Facebook Client ID]
   FACEBOOK_CLIENT_SECRET=[Your Facebook Client Secret]
   FACEBOOK_CALLBACK_URL=[Your Facebook Callback URL]
+```
+
+4. Open the app in the browser
+```
+> heroku open
 ```
 
 ## Built With
