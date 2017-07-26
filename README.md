@@ -2,7 +2,7 @@
 
 An online timer for Tabata training (the high-intensity interval training (HIIT) workout)
 
-## View the [Live Demo](https://tabata-timer.herokuapp.com)
+## [Live Demo](https://tabata-timer.herokuapp.com)
 
 You can see a complete working example [here](https://tabata-timer.herokuapp.com)
 
@@ -110,7 +110,6 @@ Follow the instructions below to set up the environment and run this project on 
 
 ### Backend:
 * express
-* jsonwebtoken
 * jwt-simple
 * mongodb
 * mongoose
@@ -118,7 +117,6 @@ Follow the instructions below to set up the environment and run this project on 
 
 ### Utils:
 * lodash
-
 
 ## Contributing
 
