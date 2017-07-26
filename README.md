@@ -27,7 +27,6 @@ Follow the instructions below to set up the environment and run this project on 
 ### Prerequisites
 
 * Node.js
-
 * MongoDB
 
 ### Installing
