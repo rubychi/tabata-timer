@@ -8,7 +8,7 @@ You can see a complete working example [here](https://tabata-timer.herokuapp.com
 
 ## Features
 
-* Set up your own tabata workout, including:
+* Set up your own tabata workout, including
 
   * Number of exercises in total
   * Number of sets per exercise
@@ -121,14 +121,14 @@ Follow the instructions below to set up the environment and run this project on 
 
 ## Built With
 
-### Frontend:
+### Frontend
 
 * react
 * redux
 * axios
 * bootstrap
 
-### Backend:
+### Backend
 
 * express
 * mongodb
@@ -136,7 +136,7 @@ Follow the instructions below to set up the environment and run this project on 
 * passport
 * jwt-simple
 
-### Utils:
+### Utils
 
 * lodash
 
