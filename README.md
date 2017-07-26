@@ -40,23 +40,23 @@ Follow the instructions below to set up the environment and run this project on 
   "test": {
     "PORT": 3000,
     "MONGODB_URI": "mongodb://localhost:27017/TabataTimerTest",
-    "JWT_SECRET": [Your secret key],
-    "GOOGLE_CLIENT_ID": [Your google client id],
-    "GOOGLE_CLIENT_SECRET": [Your google client secret],
+    "JWT_SECRET": [Your Secret Key],
+    "GOOGLE_CLIENT_ID": [Your Google Client ID],
+    "GOOGLE_CLIENT_SECRET": [Your Google Client Secret],
     "GOOGLE_CALLBACK_URL": "http://localhost:3000/auth/google/return",
-    "FACEBOOK_CLIENT_ID": [Your facebook client id],
-    "FACEBOOK_CLIENT_SECRET": [Your facebook client secret],
+    "FACEBOOK_CLIENT_ID": [Your Facebook Client ID],
+    "FACEBOOK_CLIENT_SECRET": [Your Facebook Client Secret],
     "FACEBOOK_CALLBACK_URL": "http://localhost:3000/auth/facebook/return"
   },
   "development": {
     "PORT": 3000,
     "MONGODB_URI": "mongodb://localhost:27017/TabataTimer",
-    "JWT_SECRET": [Your secret key],
-    "GOOGLE_CLIENT_ID": [Your google client id],
-    "GOOGLE_CLIENT_SECRET": [Your google client secret],
+    "JWT_SECRET": [Your Secret Key],
+    "GOOGLE_CLIENT_ID": [Your Google Client ID],
+    "GOOGLE_CLIENT_SECRET": [Your Google Client Secret],
     "GOOGLE_CALLBACK_URL": "http://localhost:3000/auth/google/return",
-    "FACEBOOK_CLIENT_ID": [Your facebook client id],
-    "FACEBOOK_CLIENT_SECRET": [Your facebook client secret],
+    "FACEBOOK_CLIENT_ID": [Your Facebook Client ID],
+    "FACEBOOK_CLIENT_SECRET": [Your Facebook Client Secret],
     "FACEBOOK_CALLBACK_URL": "http://localhost:3000/auth/facebook/return"
   }
 }
@@ -88,34 +88,37 @@ Follow the instructions below to set up the environment and run this project on 
 > git push heroku master
 > heroku addons:create mongolab:sandbox
 ```
-3. Set up config vars for
-* MONGODB_URI
-* JWT_SECRET
-* GOOGLE_CLIENT_ID
-* GOOGLE_CLIENT_SECRET
-* GOOGLE_CALLBACK_URL
-* FACEBOOK_CLIENT_ID
-* FACEBOOK_CLIENT_SECRET
-* FACEBOOK_CALLBACK_URL
+3. Set up config vars
 ```
 > heroku config:set
+  MONGODB_URI=[Your MongoDB URI]
+  JWT_SECRET=[Your JWT Secret]
+  GOOGLE_CLIENT_ID=[Your Google Client ID]
+  GOOGLE_CLIENT_SECRET=[Your Google Client Secret]
+  GOOGLE_CALLBACK_URL=[Your Google Callback URL]
+  FACEBOOK_CLIENT_ID=[Your Facebook Client ID]
+  FACEBOOK_CLIENT_SECRET=[Your Facebook Client Secret]
+  FACEBOOK_CALLBACK_URL=[Your Facebook Callback URL]
 ```
 
 ## Built With
 
 ### Frontend:
+
 * react
 * redux
 * axios
 
 ### Backend:
+
 * express
-* jwt-simple
 * mongodb
 * mongoose
 * passport
+* jwt-simple
 
 ### Utils:
+
 * lodash
 
 ## Contributing
