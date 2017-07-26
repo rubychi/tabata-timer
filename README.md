@@ -125,11 +125,11 @@ Follow the instructions below to set up the environment and run this project on 
 
 Contributions of any kind are welcome
 
-## Authors
+## Author
 
 **Ruby Chi**
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License
 
