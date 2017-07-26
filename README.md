@@ -8,6 +8,18 @@ You can see a complete working example [here](https://tabata-timer.herokuapp.com
 
 ## Features
 
+* Set up your own tabata workout, including:
+
+  * Number of exercises in total
+  * Number of sets per exercise
+  * Preparation time per exercise
+  * Work time for each set
+  * Rest time for each set
+  
+* Name your own set so that you don't need to memorize exercises every time doing your workout routine
+
+* Save your preference as preset to the cloud (Login Required)
+
 ## Getting Started
 
 Follow the instructions below to set up the environment and run this project on your local machine
