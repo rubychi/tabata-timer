@@ -20,7 +20,7 @@ You can see a complete working example [here](https://tabata-timer.herokuapp.com
 
 * Save your preference as preset to the cloud
 
-* Allow user to sign up or sign in through regular process or with Google/Facebook account (OAuth 2.0)
+* Sign up or sign in through regular process or with Google/Facebook account (OAuth 2.0)
 
 * Responsive web design (RWD)
 
