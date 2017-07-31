@@ -20,6 +20,8 @@ You can see a complete working example [here](https://tabata-timer.herokuapp.com
 
 * Save your preference as preset to the cloud (Login Required)
 
+* Allow user to sign up or sign in through regular process or with Google/Facebook account (OAuth 2.0)
+
 ## Getting Started
 
 Follow the instructions below to set up the environment and run this project on your local machine
@@ -127,18 +129,26 @@ Follow the instructions below to set up the environment and run this project on 
 * redux
 * axios
 * bootstrap
+* autoprefixer
+* babel
+* postcss
+* sass
+* html-webpack-plugin
 
 ### Backend
 
 * express
+* body-parser
 * mongodb
 * mongoose
 * passport
 * jwt-simple
+* nodemon
 
 ### Utils
 
 * lodash
+* webpack
 
 ## Contributing
 
