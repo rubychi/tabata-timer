@@ -22,6 +22,8 @@ You can see a complete working example [here](https://tabata-timer.herokuapp.com
 
 * Allow user to sign up or sign in through regular process or with Google/Facebook account (OAuth 2.0)
 
+* Responsive web design (RWD)
+
 ## Getting Started
 
 Follow the instructions below to set up the environment and run this project on your local machine
