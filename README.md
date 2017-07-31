@@ -129,13 +129,16 @@ Follow the instructions below to set up the environment and run this project on 
 
 * react
 * redux
+* reselect
 * axios
 * bootstrap
 * autoprefixer
 * babel
+* normalize.css
 * postcss
 * sass
 * html-webpack-plugin
+* mobile-detect
 
 ### Backend
 
