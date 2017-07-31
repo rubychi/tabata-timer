@@ -131,10 +131,10 @@ Follow the instructions below to set up the environment and run this project on 
 * redux
 * reselect
 * axios
-* bootstrap
-* autoprefixer
 * babel
+* bootstrap
 * normalize.css
+* autoprefixer
 * postcss
 * sass
 * html-webpack-plugin
