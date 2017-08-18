@@ -1,6 +1,7 @@
 require('./config');
 
 const express = require('express');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
   const cors = require('cors');
   app.use(cors());
 } else {
+  app.use(helmet());
   app.use(express.static('build'));
 }
 app.use(bodyParser.json());
