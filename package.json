@@ -3,6 +3,9 @@
 		"prestart": "lerna run build",
 		"start": "lerna run start"
 	},
+	"engines": {
+    "node": "8.1.3"
+  },
 	"devDependencies": {
 		"lerna": "^2.0.0",
 		"nsp": "^2.7.0",
