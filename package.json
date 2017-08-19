@@ -1,7 +1,7 @@
 {
 	"scripts": {
-		"prestart": "lerna run build",
-		"start": "lerna run start"
+		"postinstall": "lerna run build",
+		"start": "node packages/server/index.js"
 	},
 	"engines": {
     "node": "8.1.3"
