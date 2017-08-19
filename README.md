@@ -127,28 +127,23 @@ Follow the instructions below to set up the environment and run this project on 
 
 ### Frontend
 
+* babel
 * react
 * redux
-* reselect
 * axios
-* babel
 * bootstrap
 * normalize.css
-* autoprefixer
 * postcss
 * sass
-* html-webpack-plugin
-* mobile-detect
 
 ### Backend
 
 * express
-* body-parser
 * mongodb
 * mongoose
 * passport
 * jwt-simple
-* nodemon
+* helmet
 
 ### Utils
 
