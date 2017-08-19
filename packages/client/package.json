@@ -1,9 +1,10 @@
 {
   "name": "tabata-timer-client",
   "version": "1.0.0",
+  "description": "An online timer for Tabata training (the high-intensity interval training (HIIT) workout)",
   "main": "index.js",
   "scripts": {
-    "dev-watch": "SET \"NODE_ENV=development\" && webpack-dev-server --inline",
+    "dev": "SET \"NODE_ENV=development\" && webpack-dev-server --inline",
     "prebuild": "rm -rf ./build && rm -rf ../server/build",
     "build": "SET \"NODE_ENV=production\" && webpack -p --config webpack.prod.config",
     "postbuild": "rm -rf ../server/build && mv ./build ../server"
@@ -57,6 +58,5 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "uuid": "^3.0.1"
-  },
-  "description": ""
+  }
 }

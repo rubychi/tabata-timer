@@ -40,12 +40,17 @@ Follow the instructions below to set up the environment and run this project on 
 > git clone https://github.com/rubychi/tabata-timer.git
 ```
 
-2. Install [Lerna](https://github.com/lerna/lerna) globally in your machine
+2. Start a MongoDB server running on port 27017
+```
+> mongod
+```
+
+3. Install [Lerna](https://github.com/lerna/lerna) globally in your machine
 ```
 > npm install lerna -g
 ```
 
-3. Create your own config.json to securely store credentials inside packages\server\config
+4. Create your own config.json to securely store credentials inside packages\server\config
 ```
 {
   "test": {
@@ -74,21 +79,21 @@ Follow the instructions below to set up the environment and run this project on 
 
 ```
 
-4. Start the server and the service
+5. Start the server and the service
 ```
-> lerna run dev-watch
+> lerna run dev
 ```
 
-5. See it up and running on http://localhost:8080
+6. See it up and running on http://localhost:8080
 
 ## Deployment
 
 1. Build a production version of the application
 ```
-> lerna run build
+> npm start
 ```
 
-2. Change to the server directory to deploy to Heroku
+2. Deploy to Heroku
 ```
 > heroku create
 > git push heroku master
