@@ -90,10 +90,10 @@ Follow the instructions below to set up the environment and run this project on 
 
 1. Build a production version of the application
 ```
-> npm start
+> lerna run build
 ```
 
-2. Deploy to Heroku
+2. Change to the server directory to deploy to Heroku
 ```
 > heroku create
 > git push heroku master
