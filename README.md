@@ -55,7 +55,7 @@ Follow the instructions below to set up the environment and run this project on 
 > lerna bootstrap
 ```
 
-4. Create your own config.json to securely store credentials inside \packages\server\config
+5. Create your own config.json to securely store credentials inside \packages\server\config
 ```
 {
   "test": {
@@ -84,12 +84,12 @@ Follow the instructions below to set up the environment and run this project on 
 
 ```
 
-5. Back to the root directory and type the below command to start the server and the service
+6. Back to the root directory and type the below command to start the server and the service
 ```
 > lerna run dev
 ```
 
-6. See it up and running on http://localhost:8080
+7. See it up and running on http://localhost:8080
 
 ## Deployment
 
