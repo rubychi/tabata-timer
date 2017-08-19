@@ -15,7 +15,7 @@ You can see a complete working example [here](https://tabata-timer.herokuapp.com
   * Preparation time per exercise
   * Work time for each set
   * Rest time for each set
-  
+
 * Name your own set so that you don't need to memorize exercises every time doing your workout routine
 
 * Save your preference as preset to the cloud
@@ -40,17 +40,12 @@ Follow the instructions below to set up the environment and run this project on 
 > git clone https://github.com/rubychi/tabata-timer.git
 ```
 
-2. Start a MongoDB server running on port 27017
+2. Install [Lerna](https://github.com/lerna/lerna) globally in your machine
 ```
-> mongod
-```
-
-3. Install dependencies via NPM in both client and server directories
-```
-> npm install
+> npm install lerna -g
 ```
 
-4. Create your own config.json to securely store credentials inside \server\config
+3. Create your own config.json to securely store credentials inside packages\server\config
 ```
 {
   "test": {
@@ -79,23 +74,18 @@ Follow the instructions below to set up the environment and run this project on 
 
 ```
 
-5. Change to the server directory to start the server
+4. Start the server and the service
 ```
-> npm run dev-watch
-```
-
-6. Change to the client directory to start the service
-```
-> npm start
+> lerna run dev-watch
 ```
 
-7. See it up and running on http://localhost:8080
+5. See it up and running on http://localhost:8080
 
 ## Deployment
 
-1. Change to the client directory to build a production version of the application
+1. Build a production version of the application
 ```
-> npm run build
+> lerna run build
 ```
 
 2. Change to the server directory to deploy to Heroku
@@ -161,4 +151,3 @@ Contributions of any kind are welcome
 ## License
 
 This project is licensed under the MIT License
-
