@@ -4,9 +4,9 @@
   "description": "An online timer for Tabata training (the high-intensity interval training (HIIT) workout)",
   "main": "index.js",
   "scripts": {
-    "dev": "SET \"NODE_ENV=development\" && webpack-dev-server --inline",
+    "dev": "export NODE_ENV=development || SET \"NODE_ENV=development\" && webpack-dev-server --inline",
     "prebuild": "rm -rf ./build && rm -rf ../server/build",
-    "build": "SET \"NODE_ENV=production\" && webpack -p --config webpack.prod.config",
+    "build": "export NODE_ENV=development || SET \"NODE_ENV=production\" && webpack -p --config webpack.prod.config",
     "postbuild": "rm -rf ../server/build && mv ./build ../server"
   },
   "author": "",
