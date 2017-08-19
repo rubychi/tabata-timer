@@ -25,7 +25,6 @@ const localSignin = new LocalStrategy({ usernameField: 'email' }, async (email, 
     }
     return done(null, user);
   } catch(e) {
-    console.log(e);
     return done();
   }
 });

@@ -80,7 +80,7 @@ app.post('/signup', async (req, res) => {
       return res.send({ token: genAuthToken(user) });
     }
   } catch (e) {
-    return res.status(400).send(e);
+    return res.status(400).send();
   }
 });
 
