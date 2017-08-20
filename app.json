@@ -9,7 +9,6 @@
   ],
   "repository": "https://github.com/rubychi/tabata-timer.git",
   "env": {
-    "NPM_CONFIG_PRODUCTION": "false",
-    "NODE_ENV": "staging"
+    "NPM_CONFIG_PRODUCTION": "false"
   }
 }
