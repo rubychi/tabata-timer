@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
   const cors = require('cors');
   app.use(cors());
 } else {
+  console.log("hey");
   app.use(helmet());
   app.use(express.static('build'));
 }
