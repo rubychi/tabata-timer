@@ -98,7 +98,7 @@ Follow the instructions below to set up the environment and run this project on 
 > lerna run build
 ```
 
-2. Change to the server directory to deploy to Heroku
+2. Deploy to Heroku
 ```
 > heroku create
 > git push heroku master
