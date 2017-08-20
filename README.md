@@ -129,9 +129,11 @@ Follow the instructions below to set up the environment and run this project on 
 
 * babel
 * react
+* react-sound
+* react-bootstrap
+* react-css-modules
 * redux
 * axios
-* bootstrap
 * normalize.css
 * postcss
 * sass
