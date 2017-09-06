@@ -145,6 +145,7 @@ Follow the instructions below to set up the environment and run this project on 
 * mongoose
 * passport
 * jwt-simple
+* compression
 * helmet
 
 ### Utils
