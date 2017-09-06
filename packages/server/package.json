@@ -15,6 +15,7 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
+    "compression": "^1.7.0",
     "cors": "^2.8.3",
     "express": "^4.14.0",
     "helmet": "^3.8.1",
