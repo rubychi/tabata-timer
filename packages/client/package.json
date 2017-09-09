@@ -7,7 +7,7 @@
     "dev": "export NODE_ENV=development || SET \"NODE_ENV=development\" && webpack-dev-server --inline",
     "prebuild": "rm -rf ./build && rm -rf ../server/build",
     "build": "export NODE_ENV=production || SET \"NODE_ENV=production\" && webpack -p --config webpack.prod.config",
-    "postbuild": "rm -rf ../server/build && mv ./build ../server"
+    "postbuild": "rm -rf ../server/build && mv ./googled94ac434ac0fe50e.html ./build && mv ./build ../server"
   },
   "author": "",
   "license": "ISC",
