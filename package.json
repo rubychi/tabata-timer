@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"postinstall": "lerna bootstrap && lerna run build",
+		"postinstall": "lerna bootstrap && lerna run build && mv ./packages/client/googled94ac434ac0fe50e.html ./build",
 		"start": "node packages/server/index.js"
 	},
 	"engines": {
