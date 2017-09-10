@@ -11,6 +11,7 @@ class AlertDialog extends Component {
       showDialog: false,
     };
     this.closeDialog = this.closeDialog.bind(this);
+    this.deletePreset = this.deletePreset.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -19,15 +20,16 @@ class AlertDialog extends Component {
     }
   }
 
-  closeDialog(e, pressOk) {
-    pressOk = pressOk || false;
-    if (e && e.type === 'keypress' && e.key === 'Enter') {
-      pressOk = true;
-    }
-    if (pressOk) {
-      this.props.onClose(pressOk);
-    }
+  closeDialog() {
     this.setState({ showDialog: false });
+    this.props.onClose(false);
+  }
+
+  deletePreset(e) {
+    if (e.type === "click" ||
+      (e.type === 'keypress' && e.key === 'Enter')) {
+      this.props.onClose(true);
+    }
   }
 
   render() {
@@ -35,7 +37,7 @@ class AlertDialog extends Component {
       <Modal
         show={this.state.showDialog}
         onHide={this.closeDialog}
-        onKeyPress={this.closeDialog}
+        onKeyPress={this.deletePreset}
       >
         <Modal.Header closeButton>
           <Modal.Title><Glyphicon glyph="exclamation-sign" /> Alert</Modal.Title>
@@ -46,7 +48,7 @@ class AlertDialog extends Component {
           </Alert>
         </Modal.Body>
         <Modal.Footer>
-          <Button className="dialog-footer-btn" bsStyle="primary" onClick={(e) => this.closeDialog(e, true)}>Ok</Button>
+          <Button className="dialog-footer-btn" bsStyle="primary" onClick={this.deletePreset}>Ok</Button>
         </Modal.Footer>
       </Modal>
     );
