@@ -19,10 +19,15 @@ class AlertDialog extends Component {
     }
   }
 
-  closeDialog(pressOk) {
-    pressOk = pressOk === true ? true : false;
+  closeDialog(e, pressOk) {
+    pressOk = pressOk || false;
+    if (e && e.type === 'keypress' && e.key === 'Enter') {
+      pressOk = true;
+    }
+    if (pressOk) {
+      this.props.onClose(pressOk);
+    }
     this.setState({ showDialog: false });
-    this.props.onClose(pressOk);
   }
 
   render() {
@@ -30,6 +35,7 @@ class AlertDialog extends Component {
       <Modal
         show={this.state.showDialog}
         onHide={this.closeDialog}
+        onKeyPress={this.closeDialog}
       >
         <Modal.Header closeButton>
           <Modal.Title><Glyphicon glyph="exclamation-sign" /> Alert</Modal.Title>
@@ -40,7 +46,7 @@ class AlertDialog extends Component {
           </Alert>
         </Modal.Body>
         <Modal.Footer>
-          <Button className="dialog-footer-btn" bsStyle="primary" onClick={() => this.closeDialog(true)}>Ok</Button>
+          <Button className="dialog-footer-btn" bsStyle="primary" onClick={(e) => this.closeDialog(e, true)}>Ok</Button>
         </Modal.Footer>
       </Modal>
     );

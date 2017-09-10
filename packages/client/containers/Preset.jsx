@@ -21,15 +21,18 @@ class Preset extends Component {
     this.renderMenuItems = this.renderMenuItems.bind(this);
   }
 
-  addPreset() {
-    const value = this.addPresetInput.value;
-    if (!value.trim() || _.find(this.props.presetsName, (preset) => preset === value) !== undefined) {
-      this.setState({ presetValidationState: 'error' });
-    } else {
-      this.props.addPreset(value);
-      this.props.changeActivePreset(value);
-      this.props.onChangePreset(true);
-      this.setState({ presetValidationState: null, showAddPresetDialog: false });
+  addPreset(e) {
+    if (e.type === 'click' ||
+      (e.type === 'keypress' && e.key === 'Enter')) {
+      const value = this.addPresetInput.value;
+      if (!value.trim() || _.find(this.props.presetsName, (preset) => preset === value) !== undefined) {
+        this.setState({ presetValidationState: 'error' });
+      } else {
+        this.props.addPreset(value);
+        this.props.changeActivePreset(value);
+        this.props.onChangePreset(true);
+        this.setState({ presetValidationState: null, showAddPresetDialog: false });
+      }
     }
   }
 
@@ -78,6 +81,7 @@ class Preset extends Component {
           show={this.state.showAddPresetDialog}
           onEntered={() => this.addPresetInput.focus()}
           onHide={this.closeAddPresetDialog}
+          onKeyPress={this.addPreset}
         >
           <Modal.Header closeButton>
             <Modal.Title><Glyphicon glyph="plus-sign" /> Add preset</Modal.Title>

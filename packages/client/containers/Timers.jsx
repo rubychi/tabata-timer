@@ -67,28 +67,31 @@ class Timers extends Component {
     this.setState({ showModifyTitleDialog: true, modifyId: id, modifyName });
   }
 
-  saveModifiedName() {
-    const value = this.modifyNameInput.value;
-    if (!value.trim()) {
-      this.setState({ titleValidationState: 'error' });
-    } else {
-      let newCycles = _.cloneDeep(this.state.cycles);
-      const idx = _.findIndex(newCycles, { id: this.state.modifyId });
-      newCycles[idx].title = value;
-      // If it's current active subject then change the title right away
-      if (idx === 0) {
-        this.props.onChangeSubject(`T${this.state.curTabata + 1}: ${value}`);
+  saveModifiedName(e) {
+    if (e.type === 'click' ||
+      (e.type === 'keypress' && e.key === 'Enter')) {
+      const value = this.modifyNameInput.value;
+      if (!value.trim()) {
+        this.setState({ titleValidationState: 'error' });
+      } else {
+        let newCycles = _.cloneDeep(this.state.cycles);
+        const idx = _.findIndex(newCycles, { id: this.state.modifyId });
+        newCycles[idx].title = value;
+        // If it's current active subject then change the title right away
+        if (idx === 0) {
+          this.props.onChangeSubject(`T${this.state.curTabata + 1}: ${value}`);
+        }
+        this.props.setTitles({
+          id: this.props.activePreset.id,
+          titles: _.sortBy(newCycles, 'origIdx').map((item) => { return(item.title); })
+        });
+        this.props.savePresets(this.props.presets);
+        this.setState({
+          cycles: newCycles,
+          titleValidationState: null,
+          showModifyTitleDialog: false,
+        });
       }
-      this.props.setTitles({
-        id: this.props.activePreset.id,
-        titles: _.sortBy(newCycles, 'origIdx').map((item) => { return(item.title); })
-      });
-      this.props.savePresets(this.props.presets);
-      this.setState({
-        cycles: newCycles,
-        titleValidationState: null,
-        showModifyTitleDialog: false,
-      });
     }
   }
 
@@ -267,6 +270,7 @@ class Timers extends Component {
           show={this.state.showModifyTitleDialog}
           onEntered={() => this.modifyNameInput.focus()}
           onHide={this.closeModifyTitleDialog}
+          onKeyPress={this.saveModifiedName}
         >
           <Modal.Header closeButton>
             <Modal.Title><Glyphicon glyph="edit" /> Modify name</Modal.Title>
@@ -276,10 +280,17 @@ class Timers extends Component {
               <FormControl
                 inputRef={(ref) => { this.modifyNameInput = ref; }}
                 type="text"
-                placeholder={this.state.modifyName}
-                onChange={() => {
+                value={this.state.modifyName}
+                onChange={(e) => {
                   if (this.state.titleValidationState) {
-                    this.setState({ titleValidationState: null });
+                    this.setState({
+                      modifyName: e.target.value,
+                      titleValidationState: null,
+                    });
+                  } else {
+                    this.setState({
+                      modifyName: e.target.value,
+                    });
                   }
                 }}
               />
