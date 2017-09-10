@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     trim: true,
     unique: true,
+    sparse: true,
     validate: {
       validator: validator.isEmail,
       message: '{VALUE} is not a valid email',
