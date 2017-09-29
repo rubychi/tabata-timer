@@ -149,6 +149,7 @@ class Timers extends Component {
                 newState.playSound = true;
                 curCycle.workActive = false;
                 curCycle.restActive = true;
+                this.props.onChangeSubject(`Next: ${newState.cycles[1].title}`);
               }
             }
           } else if (curCycle.restActive) {
