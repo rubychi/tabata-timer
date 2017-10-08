@@ -263,7 +263,7 @@ class Timers extends Component {
       <div styleName="timers-wrapper">
         {this.renderTimers()}
         <Sound
-          url="https://www.soundjay.com/button/sounds/beep-02.mp3"
+          url="https://raw.githubusercontent.com/rubychi/tabata-timer/master/packages/client/assets/sounds/beep.mp3"
           playStatus={this.state.playSound ? Sound.status.PLAYING : Sound.status.PAUSED}
           onFinishedPlaying={() => this.setState({ playSound: false })}
         />
