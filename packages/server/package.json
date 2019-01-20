@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "export NODE_ENV=development || SET \"NODE_ENV=development\" && nodemon index.js"
+    "dev": "export NODE_ENV=development || SET \"NODE_ENV=development\" && nodemon index.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "engines": {
     "node": "8.1.3"
@@ -17,19 +19,21 @@
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.3",
-    "express": "^4.16.0",
-    "helmet": "^3.8.2",
-    "jsonwebtoken": "^7.4.1",
+    "express": "^4.14.0",
+    "helmet": "^3.8.1",
+    "jsonwebtoken": "^8.0.0",
     "jwt-simple": "^0.5.1",
     "lodash": "^4.17.5",
     "mongodb": "^2.2.29",
-    "mongoose": "^4.11.14",
+    "mongoose": "^4.13.17",
     "mongoose-findorcreate": "^2.0.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
-    "validator": "^5.6.0"
-  }
+    "validator": "^5.6.0",
+    "snyk": "^1.83.0"
+  },
+  "snyk": true
 }
