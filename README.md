@@ -4,8 +4,6 @@ An online timer for Tabata training (the high-intensity interval training (HIIT)
 
 ## [Live Demo](https://tabata-timer.herokuapp.com)
 
-You can see a complete working example [here](https://tabata-timer.herokuapp.com)
-
 ## Features
 
 * Set up your own tabata workout, including
