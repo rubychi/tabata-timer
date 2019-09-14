@@ -1,6 +1,6 @@
 # Tabata Timer
 
-An online timer for Tabata training (the high-intensity interval training (HIIT) workout)
+Online timer for Tabata training (the high-intensity interval training (HIIT) workout)
 
 ## [Live Demo](https://tabata-timer.herokuapp.com)
 
