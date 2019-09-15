@@ -20,7 +20,7 @@
     "express": "^4.14.0",
     "helmet": "^3.8.1",
     "jsonwebtoken": "^7.1.9",
-    "jwt-simple": "^0.5.1",
+    "jwt-simple": "^0.5.3",
     "lodash": "^4.17.4",
     "mongodb": "^2.2.29",
     "mongoose": "^4.5.9",
