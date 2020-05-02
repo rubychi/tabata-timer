@@ -7,7 +7,9 @@
     "dev": "export NODE_ENV=development || SET \"NODE_ENV=development\" && webpack-dev-server --inline",
     "prebuild": "rm -rf ./build && rm -rf ../server/build",
     "build": "export NODE_ENV=production || SET \"NODE_ENV=production\" && webpack -p --config webpack.prod.config",
-    "postbuild": "rm -rf ../server/build && mv ./googled94ac434ac0fe50e.html ./build && mv ./build ../server"
+    "postbuild": "rm -rf ../server/build && mv ./googled94ac434ac0fe50e.html ./build && mv ./build ../server",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "",
   "license": "ISC",
@@ -57,6 +59,8 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "uuid": "^3.0.1"
-  }
+    "uuid": "^3.0.1",
+    "snyk": "^1.316.2"
+  },
+  "snyk": true
 }
