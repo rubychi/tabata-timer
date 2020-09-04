@@ -22,7 +22,7 @@
     "jsonwebtoken": "^7.1.9",
     "jwt-simple": "^0.5.3",
     "lodash": "^4.17.4",
-    "mongodb": "^2.2.29",
+    "mongodb": "^3.1.13",
     "mongoose": "^4.5.9",
     "mongoose-findorcreate": "^2.0.0",
     "passport": "^0.3.2",
