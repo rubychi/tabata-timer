@@ -43,9 +43,9 @@ Follow the instructions below to set up the environment and run this project on 
 > mongod
 ```
 
-3. Install [Lerna](https://github.com/lerna/lerna) globally in your machine
+3. Install [Lerna](https://github.com/lerna/lerna) and [nodemon](https://github.com/remy/nodemon) globally in your machine
 ```
-> npm install lerna -g
+> npm install lerna nodemon -g
 ```
 
 4. Install all the dependencies

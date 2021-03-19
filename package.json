@@ -2,10 +2,10 @@
   "name": "root",
   "private": true,
   "scripts": {
-		"postinstall": "lerna bootstrap && lerna run build",
-		"start": "node packages/server/index.js"
-	},
-  "devDependencies": {
+    "postinstall": "lerna bootstrap && lerna run build",
+    "start": "node packages/server/index.js"
+  },
+  "dependencies": {
     "lerna": "^3.10.6"
   }
 }
