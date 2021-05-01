@@ -30,6 +30,6 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
-    "validator": "^5.6.0"
+    "validator": "^13.6.0"
   }
 }
