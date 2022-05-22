@@ -20,7 +20,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "autoprefixer": "^7.1.0",
+    "autoprefixer": "^9.0.0",
     "axios": "^0.18.1",
     "babel-core": "^6.18.0",
     "babel-eslint": "^7.1.1",
