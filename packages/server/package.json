@@ -23,7 +23,7 @@
     "jwt-simple": "^0.5.3",
     "lodash": "^4.17.4",
     "mongodb": "^3.6.5",
-    "mongoose": "^5.12.1",
+    "mongoose": "^6.4.6",
     "mongoose-findorcreate": "^3.0.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
