@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import _ from 'lodash';
-import { Panel, Button, Glyphicon } from 'react-bootstrap';
+import { Panel, Glyphicon } from 'react-bootstrap';
 import TapAndPinchable from 'react-tappable';
 import CSSModules from 'react-css-modules';
 import setSetting from '../actions/setSetting';

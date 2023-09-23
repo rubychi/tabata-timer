@@ -80,26 +80,6 @@ class Menu extends Component {
           />
           { this.renderInputRange() }
           <div styleName="btns-wrapper">
-            { /*
-            <Button
-              styleName="savebtn-custom"
-              bsStyle="primary"
-              bsSize="large"
-              onClick={() => {
-                if (this.props.signIn) {
-                  this.setState({ activeSetting: '' });
-                  this.props.savePresets(this.props.presets, (errorMessage) => {
-                    console.log('callback:', errorMessage);
-                  });
-                } else {
-                  this.setState({ activeSetting: '', showAlertDialog: true, alertMessage: 'Please sign in first!' });
-                }
-                this.props.onChangeSettings(false);
-              }}
-            >
-              <Glyphicon glyph="floppy-disk" />
-            </Button>
-            */ }
             <Button
               styleName="deletebtn-custom"
               bsStyle="danger"

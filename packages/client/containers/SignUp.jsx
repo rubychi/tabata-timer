@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import _ from 'lodash';
 import { FormControl, HelpBlock } from 'react-bootstrap';
 import CSSModules from 'react-css-modules';
-import { googleImg, fbImg } from '../global';
-// import { setSetting } from '../actions/setSetting';
+import { googleImg } from '../global';
 import SocialMediaBtn from '../components/SocialMediaBtn';
 import { ROOT_URL } from '../actions';
 import signUp from '../actions/signUp';

@@ -1,10 +1,6 @@
 import React from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import _ from 'lodash';
 import { Image } from 'react-bootstrap';
 import CSSModules from 'react-css-modules';
-import uuidV4 from 'uuid/v4';
 import styles from './styles/SocialMediaBtn';
 
 const SocialMediaBtn = (props) => {
