@@ -9,7 +9,9 @@
   <script type="text/javascript">
     if (window.opener) {
       window.opener.focus();
-      window.opener.postMessage('Authorization succeeded', 'https://tabata-timer.herokuapp.com');
+      // Note: change the url to http://localhost:8080 for local development
+      const url = 'https://tabata-timer.herokuapp.com';
+      window.opener.postMessage('Authorization succeeded', url);
     }
     window.close();
   </script>
