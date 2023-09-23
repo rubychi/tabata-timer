@@ -48,9 +48,12 @@ class App extends Component {
     const token = localStorage.getItem('token');
     // Sign in upon receiving user token
     if (!this.state.signIn && token) {
-      this.setState({
-        signIn: true,
-        showSignInDialog: false,
+      this.props.authSignUpNSignIn(this.props.presets).then(() => {
+        // Set sign in flag after received the preset data
+        this.setState({
+          signIn: true,
+          showSignInDialog: false,
+        });
       });
     }
   }
@@ -92,7 +95,6 @@ class App extends Component {
       if (token) {
         localStorage.setItem('token', token);
         this.props.cookies.set('token', token, { expires: new Date() });
-        this.props.authSignUpNSignIn(this.props.presets);
       }
     }
   }
