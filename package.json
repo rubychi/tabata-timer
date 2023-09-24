@@ -5,6 +5,9 @@
     "postinstall": "lerna bootstrap && lerna run build",
     "start": "node packages/server/index.js"
   },
+  "engines": {
+    "node": "15.11.0"
+  },
   "dependencies": {
     "lerna": "^3.10.6"
   }

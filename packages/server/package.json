@@ -7,9 +7,6 @@
     "start": "node index.js",
     "dev": "export NODE_ENV=development || SET \"NODE_ENV=development\" && nodemon index.js"
   },
-  "engines": {
-    "node": "15.11.0"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
