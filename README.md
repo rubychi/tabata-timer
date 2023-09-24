@@ -84,12 +84,15 @@ Follow the instructions below to set up the environment and run this project on 
 
 ```
 
-6. Back to the root directory and type the below command to start the server and the service
+6. Replace `authPopup.html` url to http://localhost:8080 to use OAuth 2.0 in the development env
+https://github.com/rubychi/tabata-timer/blob/13e8c6937105472c2c0501392c63c5b697d2ec60/packages/server/authPopup.html#L12-L14
+
+7. Back to the root directory and type the below command to start the server and the service
 ```
 > lerna run dev
 ```
 
-7. See it up and running on http://localhost:8080
+8. See it up and running on http://localhost:8080
 
 ## Deployment
 
