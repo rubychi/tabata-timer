@@ -28,7 +28,7 @@ Follow the instructions below to set up the environment and run this project on 
 
 ### Prerequisites
 
-* Node.js
+* Node v15.11.0
 * MongoDB
 
 ### Installing
@@ -39,8 +39,10 @@ Follow the instructions below to set up the environment and run this project on 
 ```
 
 2. Start a MongoDB server running on port 27017
+
+*Start commend depends on the OS, on macOS:*
 ```
-> mongod
+> brew services start mongodb-community
 ```
 
 3. Install [Lerna](https://github.com/lerna/lerna) and [nodemon](https://github.com/remy/nodemon) globally in your machine
