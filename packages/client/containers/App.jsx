@@ -44,16 +44,15 @@ class App extends Component {
     window.addEventListener('message', this.onReceiveMessage);
   }
 
-  componentWillReceiveProps() {
+  async componentWillReceiveProps() {
     const token = localStorage.getItem('token');
     // Sign in upon receiving user token
     if (!this.state.signIn && token) {
-      this.props.authSignUpNSignIn(this.props.presets).then(() => {
-        // Set sign in flag after received the preset data
-        this.setState({
-          signIn: true,
-          showSignInDialog: false,
-        });
+      await this.props.authSignUpNSignIn(this.props.presets);
+      // Set sign in flag after received the preset data
+      this.setState({
+        signIn: true,
+        showSignInDialog: false,
       });
     }
   }

@@ -14,7 +14,6 @@ export default function authSignUpNSignIn(presets) {
         type: SET_PRESET,
         payload: res.data.presets,
       });
-      return Promise.resolve();
     } catch({ response }) {
       console.log(response.data.error);
     }
