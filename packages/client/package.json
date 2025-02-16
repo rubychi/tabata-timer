@@ -57,6 +57,6 @@
     "sass-resources-loader": "^1.2.1",
     "style-loader": "^0.17.0",
     "uuid": "^3.0.1",
-    "webpack": "^2.7.0"
+    "webpack": "^5.0.0"
   }
 }
